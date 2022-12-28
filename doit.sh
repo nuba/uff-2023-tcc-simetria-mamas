@@ -1,3 +1,9 @@
+
+## cleanup
+
+echo '{}' > errors.json
+echo '{}' > mydata.json
+
 ###########
 # HEALTHY #
 ###########

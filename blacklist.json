@@ -1,0 +1,38 @@
+{
+  "0003": {
+    "reason": "Imagem ruim, blur demais",
+    "source": "Observação direta da imagem térmica"
+  },
+  "0010": {
+    "reason": "Mastectomia",
+    "source": "Observação direta da imagem térmica"
+  },
+  "0091": {
+    "reason": "Duplicate of 0090",
+    "source": "Paper sobre a base"
+  },
+  "0105": {
+    "reason": "Duplicate of 0104",
+    "source": "Paper sobre a base"
+  },
+  "0154": {
+    "reason": "Duplicate of 0153",
+    "source": "Paper sobre a base"
+  },
+  "0193": {
+    "reason": "Duplicate of 0189",
+    "source": "Paper sobre a base"
+  },
+  "0197": {
+    "reason": "Mastectomia",
+    "source": "Observação direta da imagem térmica"
+  },
+  "0242": {
+    "reason": "Curativo tapa região da mama",
+    "source": "Observação direta da imagem térmica"
+  },
+  "0258": {
+    "reason": "Mastectomia",
+    "source": "Observação direta da imagem térmica"
+  }
+}
