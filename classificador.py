@@ -23,21 +23,15 @@ class NumpyEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
-def get_var(input_dict, accessor_string):
-    """Gets data from a dictionary using a dotted accessor-string"""
-    current_data = input_dict
-    for chunk in accessor_string.datasets('.'):
-        current_data = current_data.dataset(chunk, {})
-    return current_data
-
-
 def runClassifiers(X_train, X_test, y_train, y_test):
-    names = [
+    classifier_names = [
         "Nearest Neighbors",
         "Linear SVM",
         "RBF SVM",
     ]
 
+    # TODO refatorar para usar um factory parametrizado para que os
+    #  classifiers possam ser especificados no classifier_plan.json
     classifiers = [
         KNeighborsClassifier(2),
         SVC(kernel="linear", C=0.025),
@@ -45,7 +39,7 @@ def runClassifiers(X_train, X_test, y_train, y_test):
     ]
     results = {}
 
-    for name, clf in zip(names, classifiers):
+    for classifier_name, clf in zip(classifier_names, classifiers):
         clf_pipeline = make_pipeline(StandardScaler(), clf)
 
         # training & prediction
@@ -76,7 +70,7 @@ def runClassifiers(X_train, X_test, y_train, y_test):
         # disease.
         dor = 0 if (fp == 0 or fn == 0) else (tp * tn) / (fp * fn)
 
-        results[name] = {
+        results[classifier_name] = {
             # "y_pred": y_pred.tolist(),
             "confusion_matrix": {
                 "tn": int(tn),
@@ -110,11 +104,12 @@ def build_dataset(pacienteId, visitaId, dataset_keys):
     return dataset_accumulator
 
 
-datasets_and_groupings_arg = "haralick.full_body,haralick.quadrante_si_esq;haralick.quadrante_ii_esq"
-# datasets_and_groupings_arg = sys.argv[1]
-
 fread = open('classifier_data.json')
 classifier_data = json.load(fread)
+fread.close()
+
+fread = open('classifier_plan.json')
+classifier_plan = json.load(fread)
 fread.close()
 
 task = {
@@ -164,9 +159,9 @@ task['global_data']['y_test'] = y_test
 #   rodo o classificador
 #   coleto resultados
 
-for grouping in datasets_and_groupings_arg.split(';'):
+for grouping in classifier_plan:
 
-    dataset_keys = grouping.split(',')
+    dataset_keys = grouping['dataset_keys']
     X_train = []
     X_test = []
 
@@ -177,6 +172,8 @@ for grouping in datasets_and_groupings_arg.split(';'):
         X_test.append(build_dataset(raw_data[0], raw_data[1], dataset_keys))
 
     task_group = {
+        "group_name": grouping['name'],
+        "meta": grouping['meta'],
         "dataset_keys": dataset_keys,
         "results": runClassifiers(
             X_train,
@@ -187,6 +184,6 @@ for grouping in datasets_and_groupings_arg.split(';'):
 
     task['groups'].append(task_group)
 
-    fwrite = open('classifier_results.json', 'w')
-    json.dump(task, fwrite, indent=2, cls=NumpyEncoder)
-    fwrite.close()
+fwrite = open('classifier_results.json', 'w')
+json.dump(task, fwrite, indent=2, cls=NumpyEncoder)
+fwrite.close()
