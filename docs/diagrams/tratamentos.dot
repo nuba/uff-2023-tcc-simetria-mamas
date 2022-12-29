@@ -1,0 +1,54 @@
+digraph tratamentos {
+rankdir=LR
+node[fontname="Sans", style=rounded,shape=rectangle]
+edge[fontname="Sans",fontsize="8"]
+
+{H; B; H_B; rank=same}
+
+
+H -> H_B  [style="invis", constraint=false]
+B -> H_B  [style="invis", constraint=false]
+
+H -> H_hd [label="+dif Haralick"]
+H -> H_bd [label="+dif LBP"]
+H_bd -> H_hd_bd [label="+dif Haralick"]
+
+H_hd -> H_hd_B [style="invis"]
+B_bd -> H_B_bd [style="invis"]  
+
+B -> B_bd [label="+dif LBP"]
+B -> B_hd [label="+dif Haralick"]
+B_hd -> B_hd_bd [label="+dif LBP"]
+
+H_hd -> H_hd_bd [label="+dif LBP"]
+B_bd -> B_hd_bd [label="+dif Haralick"]
+
+H_B -> H_B_bd [label="+dif LBP"]
+H_B_bd -> H_hd_B_bd [label="+dif Haralick"]
+
+H_B -> H_hd_B [label="+dif Haralick"]
+H_hd_B -> H_hd_B_bd [label="+dif LBP"]
+
+B_hd_bd -> H_hd_B_bd [style="invis"]
+H_hd_bd ->  H_hd_B_bd [style="invis"]
+
+B_hd -> H_hd_B [style="invis"]
+H_bd -> H_B_bd [style="invis"]
+
+
+H[label="H"]
+B[label="B"]
+H_B[label="H,B"]
+H_hd_B_bd [label="H,B,dh,db"]
+B_bd [label="B,db"]
+B_hd [label="B,dh"]
+B_hd_bd [label="B,db,dh"]
+H_B_bd [label="H,B,db"]
+H_bd [label="H,db"]
+H_hd [label="H,dh"]
+H_hd_B [label="H,B,dh"]
+H_hd_B_bd [label="H,B,dh,db"]
+H_hd_bd [label="H,dh,db"]
+
+
+}

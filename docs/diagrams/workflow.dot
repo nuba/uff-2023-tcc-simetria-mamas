@@ -1,0 +1,13 @@
+digraph {
+  node[shape=rectangle,fontsize=16]
+  edge[fontsize=14]
+  n1 [label="Protocolo Estático Frontal\nMatriz de Temperaturas"]
+  n2 [label="Termograma Frontal\nImagem em Tons de Cinza"]
+  n1 -> n2 [label="Normalização"]
+  n3 [label="Imagens Lados\nEsquerdo e Direito"]
+  n2 -> n3 [label="Segmentação\lAutomática"]
+  n4 [label="Imagens de Quadrantes da Mama:\nSuperior/Inferior e Interno/Externo"]
+  n3 -> n4 [label="Segmentação\lManual"]
+  n5 [label="Imagens das Mamas\nEsquerda e Direita"]
+  n4 -> n5 [label="Segmentação\lAutomática"]
+}

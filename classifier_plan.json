@@ -15,9 +15,9 @@
     ]
   },
   {
-    "name": "H2_hd2",
+    "name": "H2,dh2",
     "meta": {
-      "tratamento": "H_hd",
+      "tratamento": "H,dh",
       "base": "L2",
       "uses_haralick": true,
       "uses_haralick_differences": true,
@@ -46,9 +46,9 @@
     ]
   },
   {
-    "name": "H3_hd3",
+    "name": "H3,dh3",
     "meta": {
-      "tratamento": "H_hd",
+      "tratamento": "H,dh",
       "base": "L3",
       "uses_haralick": true,
       "uses_haralick_differences": true,
@@ -83,9 +83,9 @@
     ]
   },
   {
-    "name": "H4_hd4",
+    "name": "H4,dh4",
     "meta": {
-      "tratamento": "H_hd",
+      "tratamento": "H,dh",
       "base": "L4",
       "uses_haralick": true,
       "uses_haralick_differences": true,
@@ -123,9 +123,9 @@
     ]
   },
   {
-    "name": "B2_bd2",
+    "name": "B2,db2",
     "meta": {
-      "tratamento": "B_bd",
+      "tratamento": "B,db",
       "base": "L2",
       "uses_haralick": false,
       "uses_haralick_differences": false,
@@ -154,9 +154,9 @@
     ]
   },
   {
-    "name": "B3_bd3",
+    "name": "B3,db3",
     "meta": {
-      "tratamento": "B_bd",
+      "tratamento": "B,db",
       "base": "L3",
       "uses_haralick": false,
       "uses_haralick_differences": false,
@@ -191,9 +191,9 @@
     ]
   },
   {
-    "name": "B4_bd4",
+    "name": "B4,db4",
     "meta": {
-      "tratamento": "B_bd",
+      "tratamento": "B,db",
       "base": "L4",
       "uses_haralick": false,
       "uses_haralick_differences": false,
@@ -216,9 +216,9 @@
     ]
   },
   {
-    "name": "H2_B2",
+    "name": "H2,B2",
     "meta": {
-      "tratamento": "H_B",
+      "tratamento": "H,B",
       "base": "L2",
       "uses_haralick": true,
       "uses_haralick_differences": false,
@@ -233,9 +233,9 @@
     ]
   },
   {
-    "name": "H2_hd2_B2",
+    "name": "H2,B2,dh2",
     "meta": {
-      "tratamento": "H_hd_B",
+      "tratamento": "H,B,dh",
       "base": "L2",
       "uses_haralick": true,
       "uses_haralick_differences": true,
@@ -251,9 +251,9 @@
     ]
   },
   {
-    "name": "H2_B2_bd2",
+    "name": "H2,B2,db2",
     "meta": {
-      "tratamento": "H_B_bd",
+      "tratamento": "H,B,db",
       "base": "L2",
       "uses_haralick": true,
       "uses_haralick_differences": false,
@@ -269,9 +269,9 @@
     ]
   },
   {
-    "name": "H2_hd2_B2_bd2",
+    "name": "H2,B2,dh2,db2",
     "meta": {
-      "tratamento": "H_hd_B_bd",
+      "tratamento": "H,B,dh,db",
       "base": "L2",
       "uses_haralick": true,
       "uses_haralick_differences": true,
@@ -288,9 +288,9 @@
     ]
   },
   {
-    "name": "H2_bd2",
+    "name": "H2,db2",
     "meta": {
-      "tratamento": "H_bd",
+      "tratamento": "H,db",
       "base": "L2",
       "uses_haralick": true,
       "uses_haralick_differences": false,
@@ -304,9 +304,9 @@
     ]
   },
   {
-    "name": "hd2_B2",
+    "name": "B2,dh2",
     "meta": {
-      "tratamento": "hd_B",
+      "tratamento": "B,dh",
       "base": "L2",
       "uses_haralick": false,
       "uses_haralick_differences": true,
@@ -320,9 +320,9 @@
     ]
   },
   {
-    "name": "H2_hd2_bd2",
+    "name": "H2,dh2,db2",
     "meta": {
-      "tratamento": "H_hd_bd",
+      "tratamento": "H,dh,db",
       "base": "L2",
       "uses_haralick": true,
       "uses_haralick_differences": true,
@@ -337,9 +337,9 @@
     ]
   },
   {
-    "name": "hd2_B2_bd2",
+    "name": "B2,dh2,db2",
     "meta": {
-      "tratamento": "hd_B_bd",
+      "tratamento": "B,dh,db",
       "base": "L2",
       "uses_haralick": false,
       "uses_haralick_differences": true,
@@ -354,9 +354,9 @@
     ]
   },
   {
-    "name": "H3_B3",
+    "name": "H3,B3",
     "meta": {
-      "tratamento": "H_B",
+      "tratamento": "H,B",
       "base": "L3",
       "uses_haralick": true,
       "uses_haralick_differences": false,
@@ -371,9 +371,9 @@
     ]
   },
   {
-    "name": "H3_hd3_B3",
+    "name": "H3,B3,dh3",
     "meta": {
-      "tratamento": "H_hd_B",
+      "tratamento": "H,B,dh",
       "base": "L3",
       "uses_haralick": true,
       "uses_haralick_differences": true,
@@ -389,9 +389,9 @@
     ]
   },
   {
-    "name": "H3_B3_bd3",
+    "name": "H3,B3,db3",
     "meta": {
-      "tratamento": "H_B_bd",
+      "tratamento": "H,B,db",
       "base": "L3",
       "uses_haralick": true,
       "uses_haralick_differences": false,
@@ -407,9 +407,9 @@
     ]
   },
   {
-    "name": "H3_hd3_B3_bd3",
+    "name": "H3,B3,dh3,db3",
     "meta": {
-      "tratamento": "H_hd_B_bd",
+      "tratamento": "H,B,dh,db",
       "base": "L3",
       "uses_haralick": true,
       "uses_haralick_differences": true,
@@ -426,9 +426,9 @@
     ]
   },
   {
-    "name": "H3_bd3",
+    "name": "H3,db3",
     "meta": {
-      "tratamento": "H_bd",
+      "tratamento": "H,db",
       "base": "L3",
       "uses_haralick": true,
       "uses_haralick_differences": false,
@@ -442,9 +442,9 @@
     ]
   },
   {
-    "name": "hd3_B3",
+    "name": "B3,dh3",
     "meta": {
-      "tratamento": "hd_B",
+      "tratamento": "B,dh",
       "base": "L3",
       "uses_haralick": false,
       "uses_haralick_differences": true,
@@ -458,9 +458,9 @@
     ]
   },
   {
-    "name": "H3_hd3_bd3",
+    "name": "H3,dh3,db3",
     "meta": {
-      "tratamento": "H_hd_bd",
+      "tratamento": "H,dh,db",
       "base": "L3",
       "uses_haralick": true,
       "uses_haralick_differences": true,
@@ -475,9 +475,9 @@
     ]
   },
   {
-    "name": "hd3_B3_bd3",
+    "name": "B3,dh3,db3",
     "meta": {
-      "tratamento": "hd_B_bd",
+      "tratamento": "B,dh,db",
       "base": "L3",
       "uses_haralick": false,
       "uses_haralick_differences": true,
@@ -492,9 +492,9 @@
     ]
   },
   {
-    "name": "H4_B4",
+    "name": "H4,B4",
     "meta": {
-      "tratamento": "H_B",
+      "tratamento": "H,B",
       "base": "L4",
       "uses_haralick": true,
       "uses_haralick_differences": false,
@@ -521,9 +521,9 @@
     ]
   },
   {
-    "name": "H4_hd4_B4",
+    "name": "H4,B4,dh4",
     "meta": {
-      "tratamento": "H_hd_B",
+      "tratamento": "H,B,dh",
       "base": "L4",
       "uses_haralick": true,
       "uses_haralick_differences": true,
@@ -554,9 +554,9 @@
     ]
   },
   {
-    "name": "H4_B4_bd4",
+    "name": "H4,B4,db4",
     "meta": {
-      "tratamento": "H_B_bd",
+      "tratamento": "H,B,db",
       "base": "L4",
       "uses_haralick": true,
       "uses_haralick_differences": false,
@@ -587,9 +587,9 @@
     ]
   },
   {
-    "name": "H4_hd4_B4_bd4",
+    "name": "H4,B4,dh4,db4",
     "meta": {
-      "tratamento": "H_hd_B_bd",
+      "tratamento": "H,B,dh,db",
       "base": "L4",
       "uses_haralick": true,
       "uses_haralick_differences": true,
@@ -624,9 +624,9 @@
     ]
   },
   {
-    "name": "H4_bd4",
+    "name": "H4,db4",
     "meta": {
-      "tratamento": "H_bd",
+      "tratamento": "H,db",
       "base": "L4",
       "uses_haralick": true,
       "uses_haralick_differences": false,
@@ -649,9 +649,9 @@
     ]
   },
   {
-    "name": "hd4_B4",
+    "name": "B4,dh4",
     "meta": {
-      "tratamento": "hd_B",
+      "tratamento": "B,dh",
       "base": "L4",
       "uses_haralick": false,
       "uses_haralick_differences": true,
@@ -674,9 +674,9 @@
     ]
   },
   {
-    "name": "H4_hd4_bd4",
+    "name": "H4,dh4,db4",
     "meta": {
-      "tratamento": "H_hd_bd",
+      "tratamento": "H,dh,db",
       "base": "L4",
       "uses_haralick": true,
       "uses_haralick_differences": true,
@@ -703,9 +703,9 @@
     ]
   },
   {
-    "name": "hd4_B4_bd4",
+    "name": "B4,dh4,db4",
     "meta": {
-      "tratamento": "hd_B_bd",
+      "tratamento": "B,dh,db",
       "base": "L4",
       "uses_haralick": false,
       "uses_haralick_differences": true,
