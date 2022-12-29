@@ -140,7 +140,7 @@ task = {
 for pacienteId, pacienteObj in classifier_data.items():
     for visitaId, visitaObj in pacienteObj.items():
         task['global_data']['X'].append([pacienteId, visitaId])
-        task['global_data']['y'].append(visitaObj['label'])
+        task['global_data']['y'].append(1 if visitaObj['label'] == 'sick' else 0)
 
 # posso particionar
 X_train, X_test, y_train, y_test = train_test_split(

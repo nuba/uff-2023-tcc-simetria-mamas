@@ -32,16 +32,9 @@ def writeExceptionError(error):
     print('Done! (see errors.json)', flush=True)
 
 
-def readBlacklist():
-    global blacklist
-
-    fread = open('blacklist.json')
-    blacklist = json.load(fread)
-    fread.close()
-
-
-blacklist = {}
-readBlacklist()
+fread = open('blacklist.json')
+blacklist = json.load(fread)
+fread.close()
 
 matplotlib.interactive(True)
 plt.ion()
@@ -64,7 +57,9 @@ print(
     flush=True)
 
 if pacienteId in blacklist:
-    writeExceptionError("Paciente blacklisted")
+    writeExceptionError(
+        'Blacklisted ({0}, {1})'.format(blacklist[pacienteId]['reason'], blacklist[pacienteId]['source']))
+    sys.exit()
 
 dataDump = {
     "pacienteId": pacienteId,

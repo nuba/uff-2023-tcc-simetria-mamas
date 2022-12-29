@@ -1,11 +1,19 @@
 {
   "0003": {
     "reason": "Imagem ruim, blur demais",
-    "source": "Observação direta da imagem térmica"
+    "source": "Observacao direta da imagem termica"
   },
   "0010": {
     "reason": "Mastectomia",
-    "source": "Observação direta da imagem térmica"
+    "source": "Observacao direta da imagem termica"
+  },
+  "0046": {
+    "reason": "Mastectomia",
+    "source": "Observacao direta da imagem termica"
+  },
+  "0047": {
+    "reason": "Mastectomia",
+    "source": "Observacao direta da imagem termica"
   },
   "0091": {
     "reason": "Duplicate of 0090",
@@ -25,14 +33,23 @@
   },
   "0197": {
     "reason": "Mastectomia",
-    "source": "Observação direta da imagem térmica"
+    "source": "Observacao direta da imagem termica"
   },
   "0242": {
-    "reason": "Curativo tapa região da mama",
-    "source": "Observação direta da imagem térmica"
+    "reason": "Curativo tapa regiao da mama",
+    "source": "Observacao direta da imagem termica"
   },
   "0258": {
     "reason": "Mastectomia",
-    "source": "Observação direta da imagem térmica"
+    "source": "Observacao direta da imagem termica"
+  },
+  "0282": {
+    "reason": "Erro no calculo do momento (assimetria)",
+    "source": "Observacao direta da imagem termica"
+  },
+  "0318": {
+    "reason": "Erro no calculo do momento (assimetria)",
+    "source": "Observacao direta da imagem termica",
+    "obs": "paciente possui duas visitas, só uma está ruim, implementar também blacklist por (paciente, visita)"
   }
 }

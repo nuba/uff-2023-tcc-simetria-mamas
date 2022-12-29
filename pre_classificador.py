@@ -32,7 +32,7 @@ for grouping in classifier_plan:
     for dataset_key in grouping['dataset_keys']:
         required_datasets[dataset_key] = True
 
-print(required_datasets.keys())
+# print(required_datasets.keys())
 
 for pacienteId, pacienteObj in data.items():
     for visitaId, visitaObj in pacienteObj.items():
