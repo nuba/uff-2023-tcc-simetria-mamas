@@ -1,17 +1,20 @@
 import csv
 import json
 
-fread = open('classifier_results.json')
-results = json.load(fread)
-fread.close()
-
 
 def booleanToSimNao(val):
     return 'Sim' if val else 'Nao'
 
 
+fread = open('classifier_results.json')
+classifier_results = json.load(fread)
+fread.close()
+
 header = [
+    'Seed',
+    'Base',
     'Group',
+    'Tratamento',
     # 'dataset_keys',
     'Total #',
     'Train #',
@@ -27,7 +30,6 @@ header = [
     'PPV',
     'NPV',
     'DOR',
-    'Detail\nLevel',
     'Haralick',
     'Haralick\nDiff',
     'LBP',
@@ -35,32 +37,36 @@ header = [
 ]
 
 values = []
-for group in results['groups']:
-    for classifier_name, classifier_results in group['results'].items():
-        values.append(
-            [
-                group['group_name'],
-                # "\n".join(group['dataset_keys']),
-                len(results['global_data']['X']),
-                len(results['global_data']['X_train']),
-                len(results['global_data']['X_test']),
-                classifier_name,
-                classifier_results['confusion_matrix']['tp'],
-                classifier_results['confusion_matrix']['tn'],
-                classifier_results['confusion_matrix']['fp'],
-                classifier_results['confusion_matrix']['fn'],
-                '{0:.3f}'.format(classifier_results['metrics']['accuracy']),
-                '{0:.3f}'.format(classifier_results['metrics']['tpr']),
-                '{0:.3f}'.format(classifier_results['metrics']['tnr']),
-                '{0:.3f}'.format(classifier_results['metrics']['ppv']),
-                '{0:.3f}'.format(classifier_results['metrics']['npv']),
-                '{0:.3f}'.format(classifier_results['metrics']['dor']),
-                group['meta']['detail_level'],
-                booleanToSimNao(group['meta']['uses_haralick']),
-                booleanToSimNao(group['meta']['uses_haralick_differences']),
-                booleanToSimNao(group['meta']['uses_lbp']),
-                booleanToSimNao(group['meta']['uses_lbp_differences'])
-            ])
+
+for seed_data in classifier_results['results_per_seeds']:
+    for group in seed_data['groupings']:
+        for group_classifier_output in group['results_per_classifiers']:
+            values.append(
+                [
+                    seed_data['seed'],
+                    group['meta']['base'],
+                    group['group_name'],
+                    group['meta']['tratamento'],
+                    # "\n".join(group['dataset_keys']),
+                    len(classifier_results['data']['X']),
+                    len(seed_data['partitions']['X_train']),
+                    len(seed_data['partitions']['X_test']),
+                    group_classifier_output['classifier_name'],
+                    group_classifier_output['confusion_matrix']['tp'],
+                    group_classifier_output['confusion_matrix']['tn'],
+                    group_classifier_output['confusion_matrix']['fp'],
+                    group_classifier_output['confusion_matrix']['fn'],
+                    '{0:.3f}'.format(group_classifier_output['metrics']['accuracy']),
+                    '{0:.3f}'.format(group_classifier_output['metrics']['tpr']),
+                    '{0:.3f}'.format(group_classifier_output['metrics']['tnr']),
+                    '{0:.3f}'.format(group_classifier_output['metrics']['ppv']),
+                    '{0:.3f}'.format(group_classifier_output['metrics']['npv']),
+                    '{0:.3f}'.format(group_classifier_output['metrics']['dor']),
+                    booleanToSimNao(group['meta']['uses_haralick']),
+                    booleanToSimNao(group['meta']['uses_haralick_differences']),
+                    booleanToSimNao(group['meta']['uses_lbp']),
+                    booleanToSimNao(group['meta']['uses_lbp_differences'])
+                ])
 
 with open('classifier_results.csv', 'w') as file:
     writer = csv.writer(file, dialect='excel')

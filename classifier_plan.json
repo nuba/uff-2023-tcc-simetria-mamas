@@ -1,53 +1,13 @@
 [
   {
-    "name": "A1",
+    "name": "H2",
     "meta": {
+      "tratamento": "H",
+      "base": "L2",
       "uses_haralick": true,
       "uses_haralick_differences": false,
       "uses_lbp": false,
-      "uses_lbp_differences": false,
-      "detail_level": "1-corpo"
-    },
-    "dataset_keys": [
-      "haralick.full_body"
-    ]
-  },
-  {
-    "name": "A1D1",
-    "meta": {
-      "uses_haralick": true,
-      "uses_haralick_differences": true,
-      "uses_lbp": false,
-      "uses_lbp_differences": false,
-      "detail_level": "1-corpo"
-    },
-    "dataset_keys": [
-      "haralick.full_body",
-      "haralick.corpo_lado_diff"
-    ]
-  },
-  {
-    "name": "A1D2",
-    "meta": {
-      "uses_haralick": true,
-      "uses_haralick_differences": true,
-      "uses_lbp": false,
-      "uses_lbp_differences": false,
-      "detail_level": "1-corpo"
-    },
-    "dataset_keys": [
-      "haralick.full_body",
-      "haralick.corpo_lado_diff_squared"
-    ]
-  },
-  {
-    "name": "A2",
-    "meta": {
-      "uses_haralick": true,
-      "uses_haralick_differences": false,
-      "uses_lbp": false,
-      "uses_lbp_differences": false,
-      "detail_level": "2-lados-corpo"
+      "uses_lbp_differences": false
     },
     "dataset_keys": [
       "haralick.corpo_lado_esq",
@@ -55,13 +15,14 @@
     ]
   },
   {
-    "name": "A2D1",
+    "name": "H2_hd2",
     "meta": {
+      "tratamento": "H_hd",
+      "base": "L2",
       "uses_haralick": true,
       "uses_haralick_differences": true,
       "uses_lbp": false,
-      "uses_lbp_differences": false,
-      "detail_level": "2-lados-corpo"
+      "uses_lbp_differences": false
     },
     "dataset_keys": [
       "haralick.corpo_lado_esq",
@@ -70,28 +31,14 @@
     ]
   },
   {
-    "name": "A2D2",
+    "name": "H3",
     "meta": {
-      "uses_haralick": true,
-      "uses_haralick_differences": true,
-      "uses_lbp": false,
-      "uses_lbp_differences": false,
-      "detail_level": "2-lados-corpo"
-    },
-    "dataset_keys": [
-      "haralick.corpo_lado_esq",
-      "haralick.corpo_lado_dir",
-      "haralick.corpo_lado_diff_squared"
-    ]
-  },
-  {
-    "name": "A3",
-    "meta": {
+      "tratamento": "H",
+      "base": "L3",
       "uses_haralick": true,
       "uses_haralick_differences": false,
       "uses_lbp": false,
-      "uses_lbp_differences": false,
-      "detail_level": "3-mamas"
+      "uses_lbp_differences": false
     },
     "dataset_keys": [
       "haralick.quadrante_full_esq",
@@ -99,13 +46,14 @@
     ]
   },
   {
-    "name": "A3D1",
+    "name": "H3_hd3",
     "meta": {
+      "tratamento": "H_hd",
+      "base": "L3",
       "uses_haralick": true,
       "uses_haralick_differences": true,
       "uses_lbp": false,
-      "uses_lbp_differences": false,
-      "detail_level": "3-mamas"
+      "uses_lbp_differences": false
     },
     "dataset_keys": [
       "haralick.quadrante_full_esq",
@@ -114,28 +62,14 @@
     ]
   },
   {
-    "name": "A3D2",
+    "name": "H4",
     "meta": {
-      "uses_haralick": true,
-      "uses_haralick_differences": true,
-      "uses_lbp": false,
-      "uses_lbp_differences": false,
-      "detail_level": "3-mamas"
-    },
-    "dataset_keys": [
-      "haralick.quadrante_full_esq",
-      "haralick.quadrante_full_dir",
-      "haralick.quadrante_full_diff_squared"
-    ]
-  },
-  {
-    "name": "A4",
-    "meta": {
+      "tratamento": "H",
+      "base": "L4",
       "uses_haralick": true,
       "uses_haralick_differences": false,
       "uses_lbp": false,
-      "uses_lbp_differences": false,
-      "detail_level": "4-quadrantes"
+      "uses_lbp_differences": false
     },
     "dataset_keys": [
       "haralick.quadrante_si_esq",
@@ -149,13 +83,14 @@
     ]
   },
   {
-    "name": "A4D1",
+    "name": "H4_hd4",
     "meta": {
+      "tratamento": "H_hd",
+      "base": "L4",
       "uses_haralick": true,
       "uses_haralick_differences": true,
       "uses_lbp": false,
-      "uses_lbp_differences": false,
-      "detail_level": "4-quadrantes"
+      "uses_lbp_differences": false
     },
     "dataset_keys": [
       "haralick.quadrante_si_esq",
@@ -173,37 +108,14 @@
     ]
   },
   {
-    "name": "A4D2",
-    "meta": {
-      "uses_haralick": true,
-      "uses_haralick_differences": true,
-      "uses_lbp": false,
-      "uses_lbp_differences": false,
-      "detail_level": "4-quadrantes"
-    },
-    "dataset_keys": [
-      "haralick.quadrante_si_esq",
-      "haralick.quadrante_si_dir",
-      "haralick.quadrante_ie_esq",
-      "haralick.quadrante_ie_dir",
-      "haralick.quadrante_ii_esq",
-      "haralick.quadrante_ii_dir",
-      "haralick.quadrante_se_esq",
-      "haralick.quadrante_se_dir",
-      "haralick.quadrante_si_diff_squared",
-      "haralick.quadrante_ie_diff_squared",
-      "haralick.quadrante_ii_diff_squared",
-      "haralick.quadrante_se_diff_squared"
-    ]
-  },
-  {
     "name": "B2",
     "meta": {
+      "tratamento": "B",
+      "base": "L2",
       "uses_haralick": false,
       "uses_haralick_differences": false,
       "uses_lbp": true,
-      "uses_lbp_differences": false,
-      "detail_level": "2-lados-corpo"
+      "uses_lbp_differences": false
     },
     "dataset_keys": [
       "lbp.corpo_lado_esq",
@@ -211,13 +123,14 @@
     ]
   },
   {
-    "name": "B2D1",
+    "name": "B2_bd2",
     "meta": {
+      "tratamento": "B_bd",
+      "base": "L2",
       "uses_haralick": false,
       "uses_haralick_differences": false,
       "uses_lbp": true,
-      "uses_lbp_differences": true,
-      "detail_level": "2-lados-corpo"
+      "uses_lbp_differences": true
     },
     "dataset_keys": [
       "lbp.corpo_lado_esq",
@@ -228,11 +141,12 @@
   {
     "name": "B3",
     "meta": {
+      "tratamento": "B",
+      "base": "L3",
       "uses_haralick": false,
       "uses_haralick_differences": false,
       "uses_lbp": true,
-      "uses_lbp_differences": false,
-      "detail_level": "3-mamas"
+      "uses_lbp_differences": false
     },
     "dataset_keys": [
       "lbp.mama_esq",
@@ -240,13 +154,14 @@
     ]
   },
   {
-    "name": "B3D1",
+    "name": "B3_bd3",
     "meta": {
+      "tratamento": "B_bd",
+      "base": "L3",
       "uses_haralick": false,
       "uses_haralick_differences": false,
       "uses_lbp": true,
-      "uses_lbp_differences": true,
-      "detail_level": "3-mamas"
+      "uses_lbp_differences": true
     },
     "dataset_keys": [
       "lbp.mama_esq",
@@ -257,11 +172,12 @@
   {
     "name": "B4",
     "meta": {
+      "tratamento": "B",
+      "base": "L4",
       "uses_haralick": false,
       "uses_haralick_differences": false,
       "uses_lbp": true,
-      "uses_lbp_differences": false,
-      "detail_level": "4-quadrantes"
+      "uses_lbp_differences": false
     },
     "dataset_keys": [
       "lbp.quadrante_si_esq",
@@ -275,13 +191,14 @@
     ]
   },
   {
-    "name": "B4D1",
+    "name": "B4_bd4",
     "meta": {
+      "tratamento": "B_bd",
+      "base": "L4",
       "uses_haralick": false,
       "uses_haralick_differences": false,
       "uses_lbp": true,
-      "uses_lbp_differences": true,
-      "detail_level": "4-quadrantes"
+      "uses_lbp_differences": true
     },
     "dataset_keys": [
       "lbp.quadrante_si_esq",
@@ -299,45 +216,14 @@
     ]
   },
   {
-    "name": "C1",
+    "name": "H2_B2",
     "meta": {
+      "tratamento": "H_B",
+      "base": "L2",
       "uses_haralick": true,
       "uses_haralick_differences": false,
       "uses_lbp": true,
-      "uses_lbp_differences": false,
-      "detail_level": "1-corpo"
-    },
-    "dataset_keys": [
-      "haralick.full_body",
-      "lbp.corpo_lado_esq",
-      "lbp.corpo_lado_dir"
-    ]
-  },
-  {
-    "name": "C1D",
-    "meta": {
-      "uses_haralick": true,
-      "uses_haralick_differences": true,
-      "uses_lbp": true,
-      "uses_lbp_differences": true,
-      "detail_level": "1-corpo"
-    },
-    "dataset_keys": [
-      "haralick.full_body",
-      "haralick.corpo_lado_diff",
-      "lbp.corpo_lado_esq",
-      "lbp.corpo_lado_dir",
-      "lbp.corpo_lado_distances"
-    ]
-  },
-  {
-    "name": "C2",
-    "meta": {
-      "uses_haralick": true,
-      "uses_haralick_differences": false,
-      "uses_lbp": true,
-      "uses_lbp_differences": false,
-      "detail_level": "2-lados-corpo"
+      "uses_lbp_differences": false
     },
     "dataset_keys": [
       "haralick.corpo_lado_esq",
@@ -347,13 +233,50 @@
     ]
   },
   {
-    "name": "C2D",
+    "name": "H2_hd2_B2",
     "meta": {
+      "tratamento": "H_hd_B",
+      "base": "L2",
       "uses_haralick": true,
       "uses_haralick_differences": true,
       "uses_lbp": true,
-      "uses_lbp_differences": true,
-      "detail_level": "2-lados-corpo"
+      "uses_lbp_differences": false
+    },
+    "dataset_keys": [
+      "haralick.corpo_lado_esq",
+      "haralick.corpo_lado_dir",
+      "haralick.corpo_lado_diff",
+      "lbp.corpo_lado_esq",
+      "lbp.corpo_lado_dir"
+    ]
+  },
+  {
+    "name": "H2_B2_bd2",
+    "meta": {
+      "tratamento": "H_B_bd",
+      "base": "L2",
+      "uses_haralick": true,
+      "uses_haralick_differences": false,
+      "uses_lbp": true,
+      "uses_lbp_differences": true
+    },
+    "dataset_keys": [
+      "haralick.corpo_lado_esq",
+      "haralick.corpo_lado_dir",
+      "lbp.corpo_lado_esq",
+      "lbp.corpo_lado_dir",
+      "lbp.corpo_lado_distances"
+    ]
+  },
+  {
+    "name": "H2_hd2_B2_bd2",
+    "meta": {
+      "tratamento": "H_hd_B_bd",
+      "base": "L2",
+      "uses_haralick": true,
+      "uses_haralick_differences": true,
+      "uses_lbp": true,
+      "uses_lbp_differences": true
     },
     "dataset_keys": [
       "haralick.corpo_lado_esq",
@@ -365,13 +288,80 @@
     ]
   },
   {
-    "name": "C3",
+    "name": "H2_bd2",
     "meta": {
+      "tratamento": "H_bd",
+      "base": "L2",
+      "uses_haralick": true,
+      "uses_haralick_differences": false,
+      "uses_lbp": false,
+      "uses_lbp_differences": true
+    },
+    "dataset_keys": [
+      "haralick.corpo_lado_esq",
+      "haralick.corpo_lado_dir",
+      "lbp.corpo_lado_distances"
+    ]
+  },
+  {
+    "name": "hd2_B2",
+    "meta": {
+      "tratamento": "hd_B",
+      "base": "L2",
+      "uses_haralick": false,
+      "uses_haralick_differences": true,
+      "uses_lbp": true,
+      "uses_lbp_differences": false
+    },
+    "dataset_keys": [
+      "haralick.corpo_lado_diff",
+      "lbp.corpo_lado_esq",
+      "lbp.corpo_lado_dir"
+    ]
+  },
+  {
+    "name": "H2_hd2_bd2",
+    "meta": {
+      "tratamento": "H_hd_bd",
+      "base": "L2",
+      "uses_haralick": true,
+      "uses_haralick_differences": true,
+      "uses_lbp": false,
+      "uses_lbp_differences": true
+    },
+    "dataset_keys": [
+      "haralick.corpo_lado_esq",
+      "haralick.corpo_lado_dir",
+      "haralick.corpo_lado_diff",
+      "lbp.corpo_lado_distances"
+    ]
+  },
+  {
+    "name": "hd2_B2_bd2",
+    "meta": {
+      "tratamento": "hd_B_bd",
+      "base": "L2",
+      "uses_haralick": false,
+      "uses_haralick_differences": true,
+      "uses_lbp": true,
+      "uses_lbp_differences": true
+    },
+    "dataset_keys": [
+      "haralick.corpo_lado_diff",
+      "lbp.corpo_lado_esq",
+      "lbp.corpo_lado_dir",
+      "lbp.corpo_lado_distances"
+    ]
+  },
+  {
+    "name": "H3_B3",
+    "meta": {
+      "tratamento": "H_B",
+      "base": "L3",
       "uses_haralick": true,
       "uses_haralick_differences": false,
       "uses_lbp": true,
-      "uses_lbp_differences": false,
-      "detail_level": "3-mamas"
+      "uses_lbp_differences": false
     },
     "dataset_keys": [
       "haralick.quadrante_full_esq",
@@ -381,13 +371,50 @@
     ]
   },
   {
-    "name": "C3D",
+    "name": "H3_hd3_B3",
     "meta": {
+      "tratamento": "H_hd_B",
+      "base": "L3",
       "uses_haralick": true,
       "uses_haralick_differences": true,
       "uses_lbp": true,
-      "uses_lbp_differences": true,
-      "detail_level": "3-mamas"
+      "uses_lbp_differences": false
+    },
+    "dataset_keys": [
+      "haralick.quadrante_full_esq",
+      "haralick.quadrante_full_dir",
+      "haralick.quadrante_full_diff",
+      "lbp.mama_esq",
+      "lbp.mama_dir"
+    ]
+  },
+  {
+    "name": "H3_B3_bd3",
+    "meta": {
+      "tratamento": "H_B_bd",
+      "base": "L3",
+      "uses_haralick": true,
+      "uses_haralick_differences": false,
+      "uses_lbp": true,
+      "uses_lbp_differences": true
+    },
+    "dataset_keys": [
+      "haralick.quadrante_full_esq",
+      "haralick.quadrante_full_dir",
+      "lbp.mama_esq",
+      "lbp.mama_dir",
+      "lbp.mama_distances"
+    ]
+  },
+  {
+    "name": "H3_hd3_B3_bd3",
+    "meta": {
+      "tratamento": "H_hd_B_bd",
+      "base": "L3",
+      "uses_haralick": true,
+      "uses_haralick_differences": true,
+      "uses_lbp": true,
+      "uses_lbp_differences": true
     },
     "dataset_keys": [
       "haralick.quadrante_full_esq",
@@ -399,13 +426,80 @@
     ]
   },
   {
-    "name": "C4",
+    "name": "H3_bd3",
     "meta": {
+      "tratamento": "H_bd",
+      "base": "L3",
+      "uses_haralick": true,
+      "uses_haralick_differences": false,
+      "uses_lbp": false,
+      "uses_lbp_differences": true
+    },
+    "dataset_keys": [
+      "haralick.quadrante_full_esq",
+      "haralick.quadrante_full_dir",
+      "lbp.mama_distances"
+    ]
+  },
+  {
+    "name": "hd3_B3",
+    "meta": {
+      "tratamento": "hd_B",
+      "base": "L3",
+      "uses_haralick": false,
+      "uses_haralick_differences": true,
+      "uses_lbp": true,
+      "uses_lbp_differences": false
+    },
+    "dataset_keys": [
+      "haralick.quadrante_full_diff",
+      "lbp.mama_esq",
+      "lbp.mama_dir"
+    ]
+  },
+  {
+    "name": "H3_hd3_bd3",
+    "meta": {
+      "tratamento": "H_hd_bd",
+      "base": "L3",
+      "uses_haralick": true,
+      "uses_haralick_differences": true,
+      "uses_lbp": false,
+      "uses_lbp_differences": true
+    },
+    "dataset_keys": [
+      "haralick.quadrante_full_esq",
+      "haralick.quadrante_full_dir",
+      "haralick.quadrante_full_diff",
+      "lbp.mama_distances"
+    ]
+  },
+  {
+    "name": "hd3_B3_bd3",
+    "meta": {
+      "tratamento": "hd_B_bd",
+      "base": "L3",
+      "uses_haralick": false,
+      "uses_haralick_differences": true,
+      "uses_lbp": true,
+      "uses_lbp_differences": true
+    },
+    "dataset_keys": [
+      "haralick.quadrante_full_diff",
+      "lbp.mama_esq",
+      "lbp.mama_dir",
+      "lbp.mama_distances"
+    ]
+  },
+  {
+    "name": "H4_B4",
+    "meta": {
+      "tratamento": "H_B",
+      "base": "L4",
       "uses_haralick": true,
       "uses_haralick_differences": false,
       "uses_lbp": true,
-      "uses_lbp_differences": false,
-      "detail_level": "4-quadrantes"
+      "uses_lbp_differences": false
     },
     "dataset_keys": [
       "haralick.quadrante_si_esq",
@@ -427,13 +521,14 @@
     ]
   },
   {
-    "name": "C4D",
+    "name": "H4_hd4_B4",
     "meta": {
+      "tratamento": "H_hd_B",
+      "base": "L4",
       "uses_haralick": true,
       "uses_haralick_differences": true,
       "uses_lbp": true,
-      "uses_lbp_differences": true,
-      "detail_level": "4-quadrantes"
+      "uses_lbp_differences": false
     },
     "dataset_keys": [
       "haralick.quadrante_si_esq",
@@ -444,6 +539,180 @@
       "haralick.quadrante_ii_dir",
       "haralick.quadrante_se_esq",
       "haralick.quadrante_se_dir",
+      "haralick.quadrante_si_diff",
+      "haralick.quadrante_ie_diff",
+      "haralick.quadrante_ii_diff",
+      "haralick.quadrante_se_diff",
+      "lbp.quadrante_si_esq",
+      "lbp.quadrante_si_dir",
+      "lbp.quadrante_ie_esq",
+      "lbp.quadrante_ie_dir",
+      "lbp.quadrante_ii_esq",
+      "lbp.quadrante_ii_dir",
+      "lbp.quadrante_se_esq",
+      "lbp.quadrante_se_dir"
+    ]
+  },
+  {
+    "name": "H4_B4_bd4",
+    "meta": {
+      "tratamento": "H_B_bd",
+      "base": "L4",
+      "uses_haralick": true,
+      "uses_haralick_differences": false,
+      "uses_lbp": true,
+      "uses_lbp_differences": true
+    },
+    "dataset_keys": [
+      "haralick.quadrante_si_esq",
+      "haralick.quadrante_si_dir",
+      "haralick.quadrante_ie_esq",
+      "haralick.quadrante_ie_dir",
+      "haralick.quadrante_ii_esq",
+      "haralick.quadrante_ii_dir",
+      "haralick.quadrante_se_esq",
+      "haralick.quadrante_se_dir",
+      "lbp.quadrante_si_esq",
+      "lbp.quadrante_si_dir",
+      "lbp.quadrante_si_distances",
+      "lbp.quadrante_ie_esq",
+      "lbp.quadrante_ie_dir",
+      "lbp.quadrante_ie_distances",
+      "lbp.quadrante_ii_esq",
+      "lbp.quadrante_ii_dir",
+      "lbp.quadrante_ii_distances",
+      "lbp.quadrante_se_esq",
+      "lbp.quadrante_se_dir",
+      "lbp.quadrante_se_distances"
+    ]
+  },
+  {
+    "name": "H4_hd4_B4_bd4",
+    "meta": {
+      "tratamento": "H_hd_B_bd",
+      "base": "L4",
+      "uses_haralick": true,
+      "uses_haralick_differences": true,
+      "uses_lbp": true,
+      "uses_lbp_differences": true
+    },
+    "dataset_keys": [
+      "haralick.quadrante_si_esq",
+      "haralick.quadrante_si_dir",
+      "haralick.quadrante_ie_esq",
+      "haralick.quadrante_ie_dir",
+      "haralick.quadrante_ii_esq",
+      "haralick.quadrante_ii_dir",
+      "haralick.quadrante_se_esq",
+      "haralick.quadrante_se_dir",
+      "haralick.quadrante_si_diff",
+      "haralick.quadrante_ie_diff",
+      "haralick.quadrante_ii_diff",
+      "haralick.quadrante_se_diff",
+      "lbp.quadrante_si_esq",
+      "lbp.quadrante_si_dir",
+      "lbp.quadrante_si_distances",
+      "lbp.quadrante_ie_esq",
+      "lbp.quadrante_ie_dir",
+      "lbp.quadrante_ie_distances",
+      "lbp.quadrante_ii_esq",
+      "lbp.quadrante_ii_dir",
+      "lbp.quadrante_ii_distances",
+      "lbp.quadrante_se_esq",
+      "lbp.quadrante_se_dir",
+      "lbp.quadrante_se_distances"
+    ]
+  },
+  {
+    "name": "H4_bd4",
+    "meta": {
+      "tratamento": "H_bd",
+      "base": "L4",
+      "uses_haralick": true,
+      "uses_haralick_differences": false,
+      "uses_lbp": false,
+      "uses_lbp_differences": true
+    },
+    "dataset_keys": [
+      "haralick.quadrante_si_esq",
+      "haralick.quadrante_si_dir",
+      "haralick.quadrante_ie_esq",
+      "haralick.quadrante_ie_dir",
+      "haralick.quadrante_ii_esq",
+      "haralick.quadrante_ii_dir",
+      "haralick.quadrante_se_esq",
+      "haralick.quadrante_se_dir",
+      "lbp.quadrante_si_distances",
+      "lbp.quadrante_ie_distances",
+      "lbp.quadrante_ii_distances",
+      "lbp.quadrante_se_distances"
+    ]
+  },
+  {
+    "name": "hd4_B4",
+    "meta": {
+      "tratamento": "hd_B",
+      "base": "L4",
+      "uses_haralick": false,
+      "uses_haralick_differences": true,
+      "uses_lbp": true,
+      "uses_lbp_differences": false
+    },
+    "dataset_keys": [
+      "haralick.quadrante_si_diff",
+      "haralick.quadrante_ie_diff",
+      "haralick.quadrante_ii_diff",
+      "haralick.quadrante_se_diff",
+      "lbp.quadrante_si_esq",
+      "lbp.quadrante_si_dir",
+      "lbp.quadrante_ie_esq",
+      "lbp.quadrante_ie_dir",
+      "lbp.quadrante_ii_esq",
+      "lbp.quadrante_ii_dir",
+      "lbp.quadrante_se_esq",
+      "lbp.quadrante_se_dir"
+    ]
+  },
+  {
+    "name": "H4_hd4_bd4",
+    "meta": {
+      "tratamento": "H_hd_bd",
+      "base": "L4",
+      "uses_haralick": true,
+      "uses_haralick_differences": true,
+      "uses_lbp": false,
+      "uses_lbp_differences": true
+    },
+    "dataset_keys": [
+      "haralick.quadrante_si_esq",
+      "haralick.quadrante_si_dir",
+      "haralick.quadrante_ie_esq",
+      "haralick.quadrante_ie_dir",
+      "haralick.quadrante_ii_esq",
+      "haralick.quadrante_ii_dir",
+      "haralick.quadrante_se_esq",
+      "haralick.quadrante_se_dir",
+      "haralick.quadrante_si_diff",
+      "haralick.quadrante_ie_diff",
+      "haralick.quadrante_ii_diff",
+      "haralick.quadrante_se_diff",
+      "lbp.quadrante_si_distances",
+      "lbp.quadrante_ie_distances",
+      "lbp.quadrante_ii_distances",
+      "lbp.quadrante_se_distances"
+    ]
+  },
+  {
+    "name": "hd4_B4_bd4",
+    "meta": {
+      "tratamento": "hd_B_bd",
+      "base": "L4",
+      "uses_haralick": false,
+      "uses_haralick_differences": true,
+      "uses_lbp": true,
+      "uses_lbp_differences": true
+    },
+    "dataset_keys": [
       "haralick.quadrante_si_diff",
       "haralick.quadrante_ie_diff",
       "haralick.quadrante_ii_diff",

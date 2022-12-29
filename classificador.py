@@ -37,7 +37,7 @@ def runClassifiers(X_train, X_test, y_train, y_test):
         SVC(kernel="linear", C=0.025),
         SVC(gamma=2, C=1)
     ]
-    results = {}
+    results_per_classifiers = []
 
     for classifier_name, clf in zip(classifier_names, classifiers):
         clf_pipeline = make_pipeline(StandardScaler(), clf)
@@ -70,38 +70,105 @@ def runClassifiers(X_train, X_test, y_train, y_test):
         # disease.
         dor = 0 if (fp == 0 or fn == 0) else (tp * tn) / (fp * fn)
 
-        results[classifier_name] = {
-            # "y_pred": y_pred.tolist(),
-            "confusion_matrix": {
-                "tn": int(tn),
-                "fp": int(fp),
-                "fn": int(fn),
-                "tp": int(tp),
-            },
-            "metrics": {
-                "accuracy": accuracy,
-                "tpr": tpr,
-                "tnr": tnr,
-                "ppv": ppv,
-                "npv": npv,
-                "dor": dor,
-            },
-        }
+        results_per_classifiers.append(
+            {
+                'classifier_name': classifier_name,
+                "confusion_matrix": {
+                    "tn": int(tn),
+                    "fp": int(fp),
+                    "fn": int(fn),
+                    "tp": int(tp),
+                },
+                "metrics": {
+                    "accuracy": accuracy,
+                    "tpr": tpr,
+                    "tnr": tnr,
+                    "ppv": ppv,
+                    "npv": npv,
+                    "dor": dor,
+                },
+            }
+        )
 
-    return results
+    return results_per_classifiers
 
 
-def build_dataset(pacienteId, visitaId, dataset_keys):
-    global classifier_data
-
+def build_dataset(pacienteId, visitaId, dataset_keys, viable_data):
     dataset_accumulator = []
-    visitaObj = deep_get(classifier_data, '{0}.{1}'.format(pacienteId, visitaId))
+    visitaObj = deep_get(viable_data, '{0}.{1}'.format(pacienteId, visitaId))
 
     for dataset_key in dataset_keys:
         dataset = deep_get(visitaObj, dataset_key)
         dataset_accumulator = np.concatenate((dataset_accumulator, dataset))
 
     return dataset_accumulator
+
+
+def build_data(viable_data):
+    # popula X e y a partir de dados selecionados previamente
+    X = []
+    y = []
+
+    for pacienteId, pacienteObj in viable_data.items():
+        for visitaId, visitaObj in pacienteObj.items():
+            X.append([pacienteId, visitaId])
+            y.append(1 if visitaObj['label'] == 'sick' else 0)
+
+    return {'X': X, 'y': y}
+
+
+def classificationTaskRunner(X, y, viable_data, task_plan, splitting_test_size, splitting_seed):
+    task = {
+        'seed': splitting_seed,
+        'partitions': {
+            'X_train': [],
+            'X_test': [],
+            'y_train': [],
+            'y_test': []
+        },
+        'groupings': []
+    }
+
+    # posso particionar
+    X_train, X_test, y_train, y_test = train_test_split(
+        X,
+        y,
+        test_size=splitting_test_size,
+        random_state=splitting_seed)
+    task['partitions']['X_train'] = X_train
+    task['partitions']['X_test'] = X_test
+    task['partitions']['y_train'] = y_train
+    task['partitions']['y_test'] = y_test
+
+    # e agora, para cada grouping
+    #   preparo os respectivos X_train e X_test
+    #   rodo o classificador
+    #   coleto resultados
+    for grouping in task_plan:
+
+        dataset_keys = grouping['dataset_keys']
+        X_train = []
+        X_test = []
+
+        for raw_data in task['partitions']['X_train']:
+            X_train.append(build_dataset(raw_data[0], raw_data[1], dataset_keys, viable_data))
+
+        for raw_data in task['partitions']['X_test']:
+            X_test.append(build_dataset(raw_data[0], raw_data[1], dataset_keys, viable_data))
+
+        task['groupings'].append(
+            {
+                "group_name": grouping['name'],
+                "meta": grouping['meta'],
+                "dataset_keys": dataset_keys,
+                "results_per_classifiers": runClassifiers(
+                    X_train,
+                    X_test,
+                    task['partitions']['y_train'],
+                    task['partitions']['y_test'])
+            })
+
+    return task
 
 
 fread = open('classifier_data.json')
@@ -112,78 +179,31 @@ fread = open('classifier_plan.json')
 classifier_plan = json.load(fread)
 fread.close()
 
-task = {
-    "global_data": {
-        "X": [],
-        "X_train": [],
-        "X_test": [],
-        "y": [],
-        "y_train": [],
-        "y_test": []
-    },
-    "groups": [
-        # {
-        #     "dataset_keys": [
-        #         "haralick.full_body",
-        #         "haralick.quadrante_si_esq"
-        #     ],
-        #     "results": {
-        #         "y_pred": [],
-        #         "confusion_matrix": {},
-        #         "confusion_matrix_metrics": {}
-        #     }
-        # }
-    ]
-}
+data = build_data(classifier_data)
 
-# popula X e y a partir de dados selecionados previamente
-for pacienteId, pacienteObj in classifier_data.items():
-    for visitaId, visitaObj in pacienteObj.items():
-        task['global_data']['X'].append([pacienteId, visitaId])
-        task['global_data']['y'].append(1 if visitaObj['label'] == 'sick' else 0)
+run_count = 20
+test_size = 0.4
+results_for_seed = []
 
-# posso particionar
-X_train, X_test, y_train, y_test = train_test_split(
-    task['global_data']['X'],
-    task['global_data']['y'],
-    test_size=0.4,
-    random_state=42)
 
-task['global_data']['X_train'] = X_train
-task['global_data']['X_test'] = X_test
-task['global_data']['y_train'] = y_train
-task['global_data']['y_test'] = y_test
 
-# e agora, para cada grouping
-#   preparo os respectivos X_train e X_test
-#   rodo o classificador
-#   coleto resultados
-
-for grouping in classifier_plan:
-
-    dataset_keys = grouping['dataset_keys']
-    X_train = []
-    X_test = []
-
-    for raw_data in task['global_data']['X_train']:
-        X_train.append(build_dataset(raw_data[0], raw_data[1], dataset_keys))
-
-    for raw_data in task['global_data']['X_test']:
-        X_test.append(build_dataset(raw_data[0], raw_data[1], dataset_keys))
-
-    task_group = {
-        "group_name": grouping['name'],
-        "meta": grouping['meta'],
-        "dataset_keys": dataset_keys,
-        "results": runClassifiers(
-            X_train,
-            X_test,
-            task['global_data']['y_train'],
-            task['global_data']['y_test'])
-    }
-
-    task['groups'].append(task_group)
+for seed in np.arange(1, run_count+1, 1):
+    print('Running for seed {0}/{1}'.format(seed, run_count))
+    results_for_seed.append(
+        classificationTaskRunner(
+            data['X'],
+            data['y'],
+            classifier_data,
+            classifier_plan,
+            test_size,
+            seed)
+    )
 
 fwrite = open('classifier_results.json', 'w')
-json.dump(task, fwrite, indent=2, cls=NumpyEncoder)
+json.dump(
+    {
+        'data': data,
+        'test_size': test_size,
+        'results_per_seeds': results_for_seed
+    }, fwrite, indent=2, cls=NumpyEncoder)
 fwrite.close()
