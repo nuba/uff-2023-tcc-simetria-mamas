@@ -34,6 +34,11 @@ for grouping in classifier_plan:
 
 # print(required_datasets.keys())
 
+label_counters = {
+    'healthy': 0,
+    'sick': 0
+}
+
 for pacienteId, pacienteObj in data.items():
     for visitaId, visitaObj in pacienteObj.items():
 
@@ -46,7 +51,8 @@ for pacienteId, pacienteObj in data.items():
         }
         if pacienteId in blacklist:
             visitaObjSatisfies = False
-            rejection_reasons.append('Blacklisted ({0}, {1})'.format(blacklist[pacienteId]['reason'], blacklist[pacienteId]['source']))
+            rejection_reasons.append(
+                'Blacklisted ({0}, {1})'.format(blacklist[pacienteId]['reason'], blacklist[pacienteId]['source']))
         else:
 
             for dataset_key in required_datasets.keys():
@@ -61,6 +67,7 @@ for pacienteId, pacienteObj in data.items():
 
         if (visitaObjSatisfies):
             deep_set(classifier_data, '{0}.{1}'.format(pacienteId, visitaId), newVisitaObj)
+            label_counters[visitaObj['label']] = label_counters[visitaObj['label']] + 1
         else:
             classifier_data_rejects.append(
                 {
@@ -71,6 +78,10 @@ for pacienteId, pacienteObj in data.items():
                 })
 fwrite = open('classifier_data.json', 'w')
 json.dump(classifier_data, fwrite, indent=2)
+fwrite.close()
+
+fwrite = open('classifier_data_labels.json', 'w')
+json.dump(label_counters, fwrite, indent=2)
 fwrite.close()
 
 fwrite = open('classifier_data_rejects.json', 'w')

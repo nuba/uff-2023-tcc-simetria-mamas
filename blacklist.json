@@ -51,5 +51,10 @@
     "reason": "Erro no calculo do momento (assimetria)",
     "source": "Observacao direta da imagem termica",
     "obs": "paciente possui duas visitas, só uma está ruim, implementar também blacklist por (paciente, visita)"
+  },
+  "0344": {
+    "reason": "FIXME)",
+    "source": "FIXME",
+    "obs": "só pro numero ficar redondo, 50 healthy, 50 sick"
   }
 }

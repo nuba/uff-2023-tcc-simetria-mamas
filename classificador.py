@@ -2,6 +2,7 @@ import json
 
 import numpy as np
 from dict_deep import deep_get
+from sklearn import metrics
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
@@ -24,27 +25,58 @@ class NumpyEncoder(json.JSONEncoder):
 
 
 def runClassifiers(X_train, X_test, y_train, y_test):
-    classifier_names = [
-        "Nearest Neighbors",
-        "Linear SVM",
-        "RBF SVM",
-    ]
-
     # TODO refatorar para usar um factory parametrizado para que os
     #  classifiers possam ser especificados no classifier_plan.json
     classifiers = [
-        KNeighborsClassifier(2),
-        SVC(kernel="linear", C=0.025),
-        SVC(gamma=2, C=1)
+        {'name': 'Nearest Neighbors (k=2)', 'clf': KNeighborsClassifier(2)},
+        {'name': 'Nearest Neighbors (k=5)', 'clf': KNeighborsClassifier(5)},
+        {'name': 'Nearest Neighbors (k=8)', 'clf': KNeighborsClassifier(8)},
+        {'name': 'SVC Linear (C=0.0001)', 'clf': SVC(kernel="linear", C=0.0001)},
+        {'name': 'SVC Linear (C=0.001)', 'clf': SVC(kernel="linear", C=0.001)},
+        {'name': 'SVC Linear (C=0.01)', 'clf': SVC(kernel="linear", C=0.01)},
+        {'name': 'SVC Linear (C=0.1)', 'clf': SVC(kernel="linear", C=0.1)},
+        {'name': 'SVC Linear (C=1)', 'clf': SVC(kernel="linear", C=1)},
+        {'name': 'SVC Linear (C=10)', 'clf': SVC(kernel="linear", C=10)},
+        {'name': 'SVC Linear (C=100)', 'clf': SVC(kernel="linear", C=100)},
+        {'name': 'SVC Linear (C=1,000)', 'clf': SVC(kernel="linear", C=1000)},
+        {'name': 'SVC Linear (C=10,000)', 'clf': SVC(kernel="linear", C=10000)},
+        {'name': 'SVC RBF (C=0.0001)', 'clf': SVC(kernel="rbf", C=0.0001)},
+        {'name': 'SVC RBF (C=0.001)', 'clf': SVC(kernel="rbf", C=0.001)},
+        {'name': 'SVC RBF (C=0.01)', 'clf': SVC(kernel="rbf", C=0.01)},
+        {'name': 'SVC RBF (C=0.1)', 'clf': SVC(kernel="rbf", C=0.1)},
+        {'name': 'SVC RBF (C=1)', 'clf': SVC(kernel="rbf", C=1)},
+        {'name': 'SVC RBF (C=10)', 'clf': SVC(kernel="rbf", C=10)},
+        {'name': 'SVC RBF (C=100)', 'clf': SVC(kernel="rbf", C=100)},
+        {'name': 'SVC RBF (C=1,000)', 'clf': SVC(kernel="rbf", C=1000)},
+        {'name': 'SVC RBF (C=10,000)', 'clf': SVC(kernel="rbf", C=10000)},
+        {'name': 'SVC Poly (degree=3, C=0.0001)', 'clf': SVC(kernel="poly", degree=3, C=0.0001)},
+        {'name': 'SVC Poly (degree=3, C=0.001)', 'clf': SVC(kernel="poly", degree=3, C=0.001)},
+        {'name': 'SVC Poly (degree=3, C=0.01)', 'clf': SVC(kernel="poly", degree=3, C=0.01)},
+        {'name': 'SVC Poly (degree=3, C=0.1)', 'clf': SVC(kernel="poly", degree=3, C=0.1)},
+        {'name': 'SVC Poly (degree=3, C=1)', 'clf': SVC(kernel="poly", degree=3, C=1)},
+        {'name': 'SVC Poly (degree=3, C=10)', 'clf': SVC(kernel="poly", degree=3, C=10)},
+        {'name': 'SVC Poly (degree=3, C=100)', 'clf': SVC(kernel="poly", degree=3, C=100)},
+        {'name': 'SVC Poly (degree=3, C=1,000)', 'clf': SVC(kernel="poly", degree=3, C=1000)},
+        {'name': 'SVC Poly (degree=3, C=10,000)', 'clf': SVC(kernel="poly", degree=3, C=10000)},
+        {'name': 'SVC Poly (degree=5, C=0.0001)', 'clf': SVC(kernel="poly", degree=5, C=0.0001)},
+        {'name': 'SVC Poly (degree=5, C=0.001)', 'clf': SVC(kernel="poly", degree=5, C=0.001)},
+        {'name': 'SVC Poly (degree=5, C=0.01)', 'clf': SVC(kernel="poly", degree=5, C=0.01)},
+        {'name': 'SVC Poly (degree=5, C=0.1)', 'clf': SVC(kernel="poly", degree=5, C=0.1)},
+        {'name': 'SVC Poly (degree=5, C=1)', 'clf': SVC(kernel="poly", degree=5, C=1)},
+        {'name': 'SVC Poly (degree=5, C=10)', 'clf': SVC(kernel="poly", degree=5, C=10)},
+        {'name': 'SVC Poly (degree=5, C=100)', 'clf': SVC(kernel="poly", degree=5, C=100)},
+        {'name': 'SVC Poly (degree=5, C=1,000)', 'clf': SVC(kernel="poly", degree=5, C=1000)},
+        {'name': 'SVC Poly (degree=5, C=10,000)', 'clf': SVC(kernel="poly", degree=5, C=10000)},
     ]
     results_per_classifiers = []
 
-    for classifier_name, clf in zip(classifier_names, classifiers):
-        clf_pipeline = make_pipeline(StandardScaler(), clf)
+    for classifier in classifiers:
+        clf_pipeline = make_pipeline(StandardScaler(), classifier['clf'])
 
         # training & prediction
         clf_pipeline.fit(X_train, y_train)
         y_pred = clf_pipeline.predict(X_test)
+        print('.', end='', flush=True)
 
         # confusion matrix
         tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
@@ -70,9 +102,12 @@ def runClassifiers(X_train, X_test, y_train, y_test):
         # disease.
         dor = 0 if (fp == 0 or fn == 0) else (tp * tn) / (fp * fn)
 
+        sm_fpr, sm_tpr, _ = metrics.roc_curve(y_test, y_pred)
+        auc_score = metrics.auc(sm_fpr, sm_tpr)
+
         results_per_classifiers.append(
             {
-                'classifier_name': classifier_name,
+                'classifier_name': classifier['name'],
                 "confusion_matrix": {
                     "tn": int(tn),
                     "fp": int(fp),
@@ -86,6 +121,9 @@ def runClassifiers(X_train, X_test, y_train, y_test):
                     "ppv": ppv,
                     "npv": npv,
                     "dor": dor,
+                    "roc_fpr": sm_fpr,
+                    "roc_tpr": sm_tpr,
+                    "auc_score": auc_score
                 },
             }
         )
@@ -156,6 +194,7 @@ def classificationTaskRunner(X, y, viable_data, task_plan, splitting_test_size, 
         for raw_data in task['partitions']['X_test']:
             X_test.append(build_dataset(raw_data[0], raw_data[1], dataset_keys, viable_data))
 
+        print('{0}:'.format(grouping['name']), end='', flush=True)
         task['groupings'].append(
             {
                 "group_name": grouping['name'],
@@ -181,14 +220,12 @@ fread.close()
 
 data = build_data(classifier_data)
 
-run_count = 20
+run_count = 1
 test_size = 0.4
 results_for_seed = []
 
-
-
-for seed in np.arange(1, run_count+1, 1):
-    print('Running for seed {0}/{1}'.format(seed, run_count))
+for seed in np.arange(1, run_count + 1, 1):
+    print('Running for seed {0}/{1}: '.format(seed, run_count), end='', flush=True)
     results_for_seed.append(
         classificationTaskRunner(
             data['X'],
@@ -198,6 +235,7 @@ for seed in np.arange(1, run_count+1, 1):
             test_size,
             seed)
     )
+    print(' and done!', flush=True)
 
 fwrite = open('classifier_results.json', 'w')
 json.dump(
