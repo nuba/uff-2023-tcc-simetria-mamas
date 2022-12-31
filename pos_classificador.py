@@ -12,29 +12,30 @@ fread.close()
 
 header = [
     'Seed',
-    'Base',
-    'Group',
+    'Split',
+    'Nivel',
+    'Grupo',
     'Tratamento',
     # 'dataset_keys',
     'Total #',
     'Train #',
     'Test #',
-    'Classifier',
+    'Classificador',
     'TP',
     'TN',
     'FP',
     'FN',
-    'Accuracy',
+    'Acurácia',
     'TPR',
     'TNR',
     'PPV',
     'NPV',
-    'DOR',
+    # 'DOR',
     'AUC\nScore',
-    'Haralick',
-    'Haralick\nDiff',
-    'LBP',
-    'LBP\nDiff',
+    # 'Haralick',
+    # 'Haralick\nDiff',
+    # 'LBP',
+    # 'LBP\nDiff',
 ]
 
 values = []
@@ -45,6 +46,7 @@ for seed_data in classifier_results['results_per_seeds']:
             values.append(
                 [
                     seed_data['seed'],
+                    seed_data['split'],
                     group['meta']['base'],
                     group['group_name'],
                     group['meta']['tratamento'],
@@ -57,17 +59,17 @@ for seed_data in classifier_results['results_per_seeds']:
                     group_classifier_output['confusion_matrix']['tn'],
                     group_classifier_output['confusion_matrix']['fp'],
                     group_classifier_output['confusion_matrix']['fn'],
-                    '{0:.3f}'.format(group_classifier_output['metrics']['accuracy']),
-                    '{0:.3f}'.format(group_classifier_output['metrics']['tpr']),
-                    '{0:.3f}'.format(group_classifier_output['metrics']['tnr']),
-                    '{0:.3f}'.format(group_classifier_output['metrics']['ppv']),
-                    '{0:.3f}'.format(group_classifier_output['metrics']['npv']),
-                    '{0:.3f}'.format(group_classifier_output['metrics']['dor']),
-                    '{0:.3f}'.format(group_classifier_output['metrics']['auc_score']),
-                    booleanToSimNao(group['meta']['uses_haralick']),
-                    booleanToSimNao(group['meta']['uses_haralick_differences']),
-                    booleanToSimNao(group['meta']['uses_lbp']),
-                    booleanToSimNao(group['meta']['uses_lbp_differences'])
+                    '{0:.2f}'.format(group_classifier_output['metrics']['accuracy']),
+                    '{0:.2f}'.format(group_classifier_output['metrics']['tpr']),
+                    '{0:.2f}'.format(group_classifier_output['metrics']['tnr']),
+                    '{0:.2f}'.format(group_classifier_output['metrics']['ppv']),
+                    '{0:.2f}'.format(group_classifier_output['metrics']['npv']),
+                    # '{0:.3f}'.format(group_classifier_output['metrics']['dor']),
+                    '{0:.2f}'.format(group_classifier_output['metrics']['auc_score']),
+                    # booleanToSimNao(group['meta']['uses_haralick']),
+                    # booleanToSimNao(group['meta']['uses_haralick_differences']),
+                    # booleanToSimNao(group['meta']['uses_lbp']),
+                    # booleanToSimNao(group['meta']['uses_lbp_differences'])
                 ])
 
 with open('classifier_results.csv', 'w') as file:

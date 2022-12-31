@@ -1,0 +1,120 @@
+{
+  "0046": {
+    "2012-11-14": {
+      "description": "Blacklisted (Mastectomia, Observacao direta da imagem termica)",
+      "timestamp": "14:54:01.556068"
+    }
+  },
+  "0047": {
+    "2012-11-07": {
+      "description": "Blacklisted (Mastectomia, Observacao direta da imagem termica)",
+      "timestamp": "14:54:03.811479"
+    }
+  },
+  "0091": {
+    "2012-11-12": {
+      "description": "Blacklisted (Duplicate of 0090, Paper sobre a base)",
+      "timestamp": "14:56:29.886009"
+    }
+  },
+  "0105": {
+    "2012-11-30": {
+      "description": "Blacklisted (Duplicate of 0104, Paper sobre a base)",
+      "timestamp": "14:57:00.188784"
+    }
+  },
+  "0154": {
+    "2013-02-01": {
+      "description": "Blacklisted (Duplicate of 0153, Paper sobre a base)",
+      "timestamp": "14:58:54.926986"
+    }
+  },
+  "0158": {
+    "2013-02-18": {
+      "description": "Divisao por zero, nao foi poss\u00edvel calcular o momento.",
+      "timestamp": "14:59:00.639905"
+    }
+  },
+  "0193": {
+    "2013-10-02": {
+      "description": "Blacklisted (Duplicate of 0189, Paper sobre a base)",
+      "timestamp": "15:00:31.730580"
+    }
+  },
+  "0195": {
+    "2013-10-07": {
+      "description": "Divisao por zero, nao foi poss\u00edvel calcular o momento.",
+      "timestamp": "15:00:37.211559"
+    }
+  },
+  "0197": {
+    "2013-10-07": {
+      "description": "Blacklisted (Mastectomia, Observacao direta da imagem termica)",
+      "timestamp": "15:00:42.131036"
+    }
+  },
+  "0199": {
+    "2013-10-07": {
+      "description": "Divisao por zero, nao foi poss\u00edvel calcular o momento.",
+      "timestamp": "15:00:44.927684"
+    }
+  },
+  "0201": {
+    "2013-10-28": {
+      "description": "Divisao por zero, nao foi poss\u00edvel calcular o momento.",
+      "timestamp": "15:00:51.342594"
+    }
+  },
+  "0225": {
+    "2013-11-18": {
+      "description": "Divisao por zero, nao foi poss\u00edvel calcular o momento.",
+      "timestamp": "15:01:35.265119"
+    }
+  },
+  "0282": {
+    "2015-07-20": {
+      "description": "Blacklisted (Erro no calculo do momento (assimetria), Observacao direta da imagem termica)",
+      "timestamp": "15:06:15.978899"
+    }
+  },
+  "0318": {
+    "2019-08-28": {
+      "description": "Blacklisted (Erro no calculo do momento (assimetria), Observacao direta da imagem termica)",
+      "timestamp": "15:06:57.362774"
+    },
+    "2020-02-22": {
+      "description": "Blacklisted (Erro no calculo do momento (assimetria), Observacao direta da imagem termica)",
+      "timestamp": "15:06:58.997938"
+    }
+  },
+  "0346": {
+    "2019-08-28": {
+      "description": "Divisao por zero, nao foi poss\u00edvel calcular o momento.",
+      "timestamp": "15:08:30.835311"
+    }
+  },
+  "0355": {
+    "2019-03-27": {
+      "description": "Divisao por zero, nao foi poss\u00edvel calcular o momento.",
+      "timestamp": "15:08:50.653933"
+    }
+  },
+  "0368": {
+    "2019-12-11": {
+      "description": "Divisao por zero, nao foi poss\u00edvel calcular o momento.",
+      "timestamp": "15:09:46.290413"
+    }
+  },
+  "0390": {
+    "2019-01-30": {
+      "description": "Divisao por zero, nao foi poss\u00edvel calcular o momento.",
+      "timestamp": "15:10:55.357617"
+    }
+  },
+  "0408": {
+    "2019-02-27": {
+      "description": "Divisao por zero, nao foi poss\u00edvel calcular o momento.",
+      "timestamp": "15:11:56.660576"
+    }
+  }
+}

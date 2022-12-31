@@ -28,49 +28,170 @@ def runClassifiers(X_train, X_test, y_train, y_test):
     # TODO refatorar para usar um factory parametrizado para que os
     #  classifiers possam ser especificados no classifier_plan.json
     classifiers = [
-        {'name': 'Nearest Neighbors (k=2)', 'clf': KNeighborsClassifier(2)},
-        {'name': 'Nearest Neighbors (k=5)', 'clf': KNeighborsClassifier(5)},
-        {'name': 'Nearest Neighbors (k=8)', 'clf': KNeighborsClassifier(8)},
-        {'name': 'SVC Linear (C=0.0001)', 'clf': SVC(kernel="linear", C=0.0001)},
-        {'name': 'SVC Linear (C=0.001)', 'clf': SVC(kernel="linear", C=0.001)},
-        {'name': 'SVC Linear (C=0.01)', 'clf': SVC(kernel="linear", C=0.01)},
-        {'name': 'SVC Linear (C=0.1)', 'clf': SVC(kernel="linear", C=0.1)},
-        {'name': 'SVC Linear (C=1)', 'clf': SVC(kernel="linear", C=1)},
-        {'name': 'SVC Linear (C=10)', 'clf': SVC(kernel="linear", C=10)},
-        {'name': 'SVC Linear (C=100)', 'clf': SVC(kernel="linear", C=100)},
-        {'name': 'SVC Linear (C=1,000)', 'clf': SVC(kernel="linear", C=1000)},
-        {'name': 'SVC Linear (C=10,000)', 'clf': SVC(kernel="linear", C=10000)},
-        {'name': 'SVC RBF (C=0.0001)', 'clf': SVC(kernel="rbf", C=0.0001)},
-        {'name': 'SVC RBF (C=0.001)', 'clf': SVC(kernel="rbf", C=0.001)},
-        {'name': 'SVC RBF (C=0.01)', 'clf': SVC(kernel="rbf", C=0.01)},
-        {'name': 'SVC RBF (C=0.1)', 'clf': SVC(kernel="rbf", C=0.1)},
-        {'name': 'SVC RBF (C=1)', 'clf': SVC(kernel="rbf", C=1)},
-        {'name': 'SVC RBF (C=10)', 'clf': SVC(kernel="rbf", C=10)},
-        {'name': 'SVC RBF (C=100)', 'clf': SVC(kernel="rbf", C=100)},
-        {'name': 'SVC RBF (C=1,000)', 'clf': SVC(kernel="rbf", C=1000)},
-        {'name': 'SVC RBF (C=10,000)', 'clf': SVC(kernel="rbf", C=10000)},
-        {'name': 'SVC Poly (degree=3, C=0.0001)', 'clf': SVC(kernel="poly", degree=3, C=0.0001)},
-        {'name': 'SVC Poly (degree=3, C=0.001)', 'clf': SVC(kernel="poly", degree=3, C=0.001)},
-        {'name': 'SVC Poly (degree=3, C=0.01)', 'clf': SVC(kernel="poly", degree=3, C=0.01)},
-        {'name': 'SVC Poly (degree=3, C=0.1)', 'clf': SVC(kernel="poly", degree=3, C=0.1)},
-        {'name': 'SVC Poly (degree=3, C=1)', 'clf': SVC(kernel="poly", degree=3, C=1)},
-        {'name': 'SVC Poly (degree=3, C=10)', 'clf': SVC(kernel="poly", degree=3, C=10)},
-        {'name': 'SVC Poly (degree=3, C=100)', 'clf': SVC(kernel="poly", degree=3, C=100)},
-        {'name': 'SVC Poly (degree=3, C=1,000)', 'clf': SVC(kernel="poly", degree=3, C=1000)},
-        {'name': 'SVC Poly (degree=3, C=10,000)', 'clf': SVC(kernel="poly", degree=3, C=10000)},
-        {'name': 'SVC Poly (degree=5, C=0.0001)', 'clf': SVC(kernel="poly", degree=5, C=0.0001)},
-        {'name': 'SVC Poly (degree=5, C=0.001)', 'clf': SVC(kernel="poly", degree=5, C=0.001)},
-        {'name': 'SVC Poly (degree=5, C=0.01)', 'clf': SVC(kernel="poly", degree=5, C=0.01)},
-        {'name': 'SVC Poly (degree=5, C=0.1)', 'clf': SVC(kernel="poly", degree=5, C=0.1)},
-        {'name': 'SVC Poly (degree=5, C=1)', 'clf': SVC(kernel="poly", degree=5, C=1)},
-        {'name': 'SVC Poly (degree=5, C=10)', 'clf': SVC(kernel="poly", degree=5, C=10)},
-        {'name': 'SVC Poly (degree=5, C=100)', 'clf': SVC(kernel="poly", degree=5, C=100)},
-        {'name': 'SVC Poly (degree=5, C=1,000)', 'clf': SVC(kernel="poly", degree=5, C=1000)},
-        {'name': 'SVC Poly (degree=5, C=10,000)', 'clf': SVC(kernel="poly", degree=5, C=10000)},
+        {
+            'name': 'SVC Linear (C=0.0001)',
+            'clf': SVC(kernel="linear", C=0.0001)
+        },
+        {
+            'name': 'SVC Linear (C=0.001)',
+            'clf': SVC(kernel="linear", C=0.001)
+        },
+        {
+            'name': 'SVC Linear (C=0.01)',
+            'clf': SVC(kernel="linear", C=0.01)
+        },
+        {
+            'name': 'SVC Linear (C=0.1)',
+            'clf': SVC(kernel="linear", C=0.1)
+        },
+        {
+            'name': 'SVC Linear (C=1)',
+            'clf': SVC(kernel="linear", C=1)
+        },
+        {
+            'name': 'SVC Linear (C=10)',
+            'clf': SVC(kernel="linear", C=10)
+        },
+        {
+            'name': 'SVC Linear (C=100)',
+            'clf': SVC(kernel="linear", C=100)
+        },
+        {
+            'name': 'SVC Linear (C=1,000)',
+            'clf': SVC(kernel="linear", C=1000)
+        },
+        {
+            'name': 'SVC Linear (C=10,000)',
+            'clf': SVC(kernel="linear", C=10000)
+        },
+        {
+            'name': 'SVC RBF (C=0.0001)',
+            'clf': SVC(kernel="rbf", C=0.0001)
+        },
+        {
+            'name': 'SVC RBF (C=0.001)',
+            'clf': SVC(kernel="rbf", C=0.001)
+        },
+        {
+            'name': 'SVC RBF (C=0.01)',
+            'clf': SVC(kernel="rbf", C=0.01)
+        },
+        {
+            'name': 'SVC RBF (C=0.1)',
+            'clf': SVC(kernel="rbf", C=0.1)
+        },
+        {
+            'name': 'SVC RBF (C=1)',
+            'clf': SVC(kernel="rbf", C=1)
+        },
+        {
+            'name': 'SVC RBF (C=10)',
+            'clf': SVC(kernel="rbf", C=10)
+        },
+        {
+            'name': 'SVC RBF (C=100)',
+            'clf': SVC(kernel="rbf", C=100)
+        },
+        {
+            'name': 'SVC RBF (C=1,000)',
+            'clf': SVC(kernel="rbf", C=1000)
+        },
+        {
+            'name': 'SVC RBF (C=10,000)',
+            'clf': SVC(kernel="rbf", C=10000)
+        },
+        {
+            'name': 'SVC Poly (degree=3, C=0.0001)',
+            'clf': SVC(kernel="poly", degree=3, C=0.0001)
+        },
+        {
+            'name': 'SVC Poly (degree=3, C=0.001)',
+            'clf': SVC(kernel="poly", degree=3, C=0.001)
+        },
+        {
+            'name': 'SVC Poly (degree=3, C=0.01)',
+            'clf': SVC(kernel="poly", degree=3, C=0.01)
+        },
+        {
+            'name': 'SVC Poly (degree=3, C=0.1)',
+            'clf': SVC(kernel="poly", degree=3, C=0.1)
+        },
+        {
+            'name': 'SVC Poly (degree=3, C=1)',
+            'clf': SVC(kernel="poly", degree=3, C=1)
+        },
+        {
+            'name': 'SVC Poly (degree=3, C=10)',
+            'clf': SVC(kernel="poly", degree=3, C=10)
+        },
+        {
+            'name': 'SVC Poly (degree=3, C=100)',
+            'clf': SVC(kernel="poly", degree=3, C=100)
+        },
+        {
+            'name': 'SVC Poly (degree=3, C=1,000)',
+            'clf': SVC(kernel="poly", degree=3, C=1000)
+        },
+        {
+            'name': 'SVC Poly (degree=3, C=10,000)',
+            'clf': SVC(kernel="poly", degree=3, C=10000)
+        },
+        {
+            'name': 'SVC Poly (degree=5, C=0.0001)',
+            'clf': SVC(kernel="poly", degree=5, C=0.0001)
+        },
+        {
+            'name': 'SVC Poly (degree=5, C=0.001)',
+            'clf': SVC(kernel="poly", degree=5, C=0.001)
+        },
+        {
+            'name': 'SVC Poly (degree=5, C=0.01)',
+            'clf': SVC(kernel="poly", degree=5, C=0.01)
+        },
+        {
+            'name': 'SVC Poly (degree=5, C=0.1)',
+            'clf': SVC(kernel="poly", degree=5, C=0.1)
+        },
+        {
+            'name': 'SVC Poly (degree=5, C=1)',
+            'clf': SVC(kernel="poly", degree=5, C=1)
+        },
+        {
+            'name': 'SVC Poly (degree=5, C=10)',
+            'clf': SVC(kernel="poly", degree=5, C=10)
+        },
+        {
+            'name': 'SVC Poly (degree=5, C=100)',
+            'clf': SVC(kernel="poly", degree=5, C=100)
+        },
+        {
+            'name': 'SVC Poly (degree=5, C=1,000)',
+            'clf': SVC(kernel="poly", degree=5, C=1000)
+        },
+        {
+            'name': 'SVC Poly (degree=5, C=10,000)',
+            'clf': SVC(kernel="poly", degree=5, C=10000)
+        },
+        {
+            'name': 'Nearest Neighbors (k=2)',
+            'clf': KNeighborsClassifier(2)
+        },
+        {
+            'name': 'Nearest Neighbors (k=5)',
+            'clf': KNeighborsClassifier(5)
+        },
+        {
+            'name': 'Nearest Neighbors (k=8)',
+            'clf': KNeighborsClassifier(8)
+        },
     ]
     results_per_classifiers = []
 
+    classifier_counter = 1
+
     for classifier in classifiers:
+        classifier['name'] = '{0:02d} {1}'.format(classifier_counter, classifier['name'])
+        classifier_counter = classifier_counter + 1
         clf_pipeline = make_pipeline(StandardScaler(), classifier['clf'])
 
         # training & prediction
@@ -158,6 +279,7 @@ def build_data(viable_data):
 def classificationTaskRunner(X, y, viable_data, task_plan, splitting_test_size, splitting_seed):
     task = {
         'seed': splitting_seed,
+        'split': splitting_test_size,
         'partitions': {
             'X_train': [],
             'X_test': [],
@@ -220,28 +342,31 @@ fread.close()
 
 data = build_data(classifier_data)
 
-run_count = 1
-test_size = 0.4
+run_count = 30
+# splitting_sizes = [0.4, 0.3, 0.2]
+splitting_sizes = [0.3]
 results_for_seed = []
 
 for seed in np.arange(1, run_count + 1, 1):
-    print('Running for seed {0}/{1}: '.format(seed, run_count), end='', flush=True)
-    results_for_seed.append(
-        classificationTaskRunner(
-            data['X'],
-            data['y'],
-            classifier_data,
-            classifier_plan,
-            test_size,
-            seed)
-    )
-    print(' and done!', flush=True)
+    for splitting_size in splitting_sizes:
+        print(
+            'Running for seed {0}/{1} and splitting size {2}: '.format(
+                seed, run_count, splitting_size), end='', flush=True)
+        results_for_seed.append(
+            classificationTaskRunner(
+                data['X'],
+                data['y'],
+                classifier_data,
+                classifier_plan,
+                splitting_size,
+                seed)
+        )
+        print(' and done!', flush=True)
 
 fwrite = open('classifier_results.json', 'w')
 json.dump(
     {
         'data': data,
-        'test_size': test_size,
         'results_per_seeds': results_for_seed
     }, fwrite, indent=2, cls=NumpyEncoder)
 fwrite.close()
