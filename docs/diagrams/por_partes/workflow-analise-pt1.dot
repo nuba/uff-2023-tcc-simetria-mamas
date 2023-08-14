@@ -1,0 +1,50 @@
+digraph {
+    ranksep = "0.05"
+    nodesep = "0.7"
+    ratio=1.3
+    // dpi=400
+    node [
+        fontname = "Times"
+        shape = rectangle
+        fontsize = 16
+        style = "filled,bold"
+        fillcolor = "#ffffff",
+        margin = "0.1,0.1"
+    ]
+    edge [
+        fontname = "Times"
+        fontsize = 14
+    ]
+
+    dmr [
+            label = "\nDMR Visual Lab\n[Paciente, Visita,\nDiagnóstico,\nTermograma]",
+            shape = cylinder, fillcolor = "#dddddd"
+            margin = "0.1,0"
+        ]
+
+    subgraph cluster_l1 {
+        fontsize = 16
+        fontname = "Times"
+        label = "L1: o torax"
+        style="rounded,dotted"
+
+        { dmr; task_dmr2imgs; dmr_imgs; rank = same }
+
+
+
+        task_dmr2imgs [label = "Conversão em imagens,\nNormalização, \nExtração de fundo"]
+
+        dmr_imgs [
+            label = "Imagens\nRegião do Torax"
+            shape = folder, fillcolor = "#dddddd"
+        ]
+
+    }
+
+	l2_task_seg[shape=none, label="L2\n..."]
+
+
+    dmr -> task_dmr2imgs -> dmr_imgs
+    dmr_imgs -> l2_task_seg [constraint=false]
+
+}

@@ -1,0 +1,57 @@
+digraph {
+    rankdir=LR
+    ranksep = "0.45"
+    nodesep = "0.3"
+    ratio=0.4
+    // dpi=400
+    node [
+        fontname = "Times"
+        shape = rectangle
+        fontsize = 16
+        style = "filled,bold"
+        fillcolor = "#ffffff",
+        margin = "0.1,0.1"
+    ]
+    edge [
+        fontname = "Times"
+        fontsize = 14
+    ]
+
+    base [
+            label = "\nBase\nde dados",
+            shape = cylinder, fillcolor = "#dddddd"
+            margin = "0.1,0"
+        ]
+
+    subgraph cluster_l1 {
+        fontsize = 16
+        fontname = "Times"
+        label = "Escopo lógico"
+        style="rounded,dotted"
+
+        task [label = "Processo"]
+
+        imgs [
+            label = "Arquivos"
+            shape = folder, fillcolor = "#dddddd"
+        ]
+
+    	task -> imgs
+    	{task; imgs; rank=same}
+
+    }
+
+    outside[shape=none, label="..."]
+    outside_note[shape=none, label="asdfg", style=invis] 
+    outside -> outside_note [fontsize="9", taillabel="(parte omitida por brevidade\le detalhada em outro diagrama)\l", color=invis]
+
+
+    base -> task [label="fluxo\nde dados"]
+    task -> outside
+
+    base -> imgs -> outside_note [style=invis] 
+
+    
+
+
+}

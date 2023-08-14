@@ -8,6 +8,8 @@ subgraph cluster_1 {
 fontname="Times"
 fontsize="12"
 label="Base B e tratamentos +dh,+db,+dh+db"
+peripheries=0
+labelloc=b
 B[label="B"]
 B_bd [label="B,db"]
 B_hd [label="B,dh"]
@@ -18,6 +20,8 @@ subgraph cluster_2 {
 fontname="Times"
 fontsize="12"
 label="Base H e tratamentos +dh,+db,+dh+db"
+peripheries=0
+labelloc=b
 H[label="H"]
 H_bd [label="H,db"]
 H_hd [label="H,dh"]
@@ -33,6 +37,8 @@ subgraph cluster_3 {
 fontname="Times"
 fontsize="12"
 label="Base H,B e tratamentos +dh,+db,+dh+db"
+peripheries=0
+labelloc=b
 H_B[label="H,B"]
 H_B_bd [label="H,B,db"]
 H_hd_B [label="H,B,dh"]
@@ -50,8 +56,8 @@ H_hd_B_bd [label="H,B,dh,db"]
 // H -> H_B  [style="dotted", constraint=false]
 
 
-// H_hd -> H_hd_B [style="dotted", constraint=false]
-// B_bd -> H_B_bd [style="dotted", constraint=false]  
+// H_hd -> H_hd_B [color=red, style="dotted", constraint=true]
+// B_bd -> H_B_bd [color=red, style="dotted", constraint=true]  
 
 B -> B_bd [label="+dif LBP"]
 B -> B_hd [label="+dif Haralick"]

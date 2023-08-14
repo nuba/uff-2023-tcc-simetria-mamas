@@ -1,0 +1,69 @@
+digraph {
+    ranksep = "0.05"
+    nodesep = "0.7"
+    ratio=0.8
+    // dpi=400
+    node [
+        fontname = "Times"
+        shape = rectangle
+        fontsize = 16
+        style = "filled,bold"
+        fillcolor = "#ffffff",
+        margin = "0.1,0.1"
+    ]
+    edge [
+        fontname = "Times"
+        fontsize = 14
+    ]
+
+
+        l2_imgs [
+            label = "Imagens segmentadas\nde cada lado\n[Direto/Esquerdo]",
+            shape = folder, fillcolor = "#dddddd"
+        ]
+
+
+    subgraph cluster_l3 {
+        fontsize = 16
+        fontname = "Times"
+        label = "L3: cada mama"
+        style="rounded,dotted"
+
+        l3_task_aplicao_masks_mama_inteira [label = "Montagem e aplicação\nde máscaras de\nmama inteira"]
+        l3_imgs [
+            label = "Imagens segmentadas\nde cada mama: \n[Esquerda/Direita]",
+            shape = folder, fillcolor = "#dddddd"
+        ]
+
+        l3_task_aplicao_masks_mama_inteira -> l3_imgs
+        l3_task_extracao_features_a [label = "Extração de features\nHaralick e LBP: H, B"]
+        l3_task_extracao_features_b [label = "Cálculo de\ndiferenças\nentre lados:\ndh, db"]
+
+        l3_data [
+            label = "\nDados L3\n[Paciente, Visita,\nDiagnostico,\nH, B,\ndh, db]",
+            shape = cylinder, fillcolor = "#dddddd"
+            margin = "0.1,0"
+        ]
+        l3_imgs -> l3_task_extracao_features_a -> l3_task_extracao_features_b -> l3_data
+        l3_task_extracao_features_a -> l3_data
+        {l3_task_extracao_features_b; l3_data; rank=same}
+    }
+
+        l4_imgs_masks [
+            label = "Máscaras para\ncada quadrante: \n[Esquerdo/Direito,\nInferior/Superior\nInterno/Externo]",
+            shape = folder, fillcolor = "#dddddd"
+        ]
+
+
+    final_results [
+        label = "\nDados para Classificação\n[Paciente, Visita, Diagnostico,\nNível, H, B, dh, db]",
+        shape = cylinder, fillcolor = "#dddddd"
+        margin = "0.1,0"
+    ]
+
+    l3_data -> final_results  [constraint=false]
+    l4_imgs_masks -> l3_task_aplicao_masks_mama_inteira [constraint=false]
+    l2_imgs -> l3_task_aplicao_masks_mama_inteira [constraint=false]
+
+    l2_imgs -> l4_imgs_masks [style=invis]
+}

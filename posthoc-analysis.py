@@ -4,6 +4,7 @@ import json
 from scipy import stats
 import scikit_posthocs as sp
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def is_transition_of_interest(source, target):
@@ -177,7 +178,7 @@ def build_nemenyi_friedman(data, l, g):
     )
     df.index = build_pd_labels(g)
     df.columns = build_pd_labels(g)
-    return df.to_dict(orient='index')
+    return df
 
 
 def build_pd_labels(g):
@@ -185,17 +186,24 @@ def build_pd_labels(g):
 
 
 results = []
+heatmap_args = {'linewidths': 0.25, 'linecolor': '0.5', 'clip_on': False, 'square': True,
+                        'cbar_ax_bbox': [0.80, 0.35, 0.04, 0.3]}
 
 for level in ['L2', 'L3', 'L4']:
     for base_group in ['B', 'H', 'H,B']:
         _, friedman_p = build_friedman_chi_square(accuracy_data, level, base_group)
+        results_nemenyi = build_nemenyi_friedman(accuracy_data, level, base_group)
         results.append(
             {
                 'level': level,
                 'base_group': base_group,
                 'friedman_p': friedman_p,
-                'nemenyi': build_nemenyi_friedman(accuracy_data, level, base_group)
+                'nemenyi': results_nemenyi.to_dict(orient='index')
             })
+
+        plt.figure()
+        sp.sign_plot(results_nemenyi, **heatmap_args)
+        plt.savefig('imgs-out/tcc-final-nemenyi-vis-{0}-{1}.png'.format(level, base_group))
 
 print(results)
 

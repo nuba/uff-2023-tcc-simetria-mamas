@@ -1,0 +1,171 @@
+digraph {
+    ranksep = "0.05"
+    nodesep = "0.7"
+    ratio=1.3
+    // dpi=400
+    node [
+        fontname = "Times"
+        shape = rectangle
+        fontsize = 16
+        style = "filled,bold"
+        fillcolor = "#ffffff",
+        margin = "0.1,0.1"
+    ]
+    edge [
+        fontname = "Times"
+        fontsize = 14
+    ]
+
+    dmr [
+            label = "\nDMR Visual Lab\n[Paciente, Visita,\nDiagnóstico,\nTermograma]",
+            shape = cylinder, fillcolor = "#dddddd"
+            margin = "0.1,0"
+        ]
+
+    subgraph cluster_l1 {
+        fontsize = 16
+        fontname = "Times"
+        label = "L1: o torax"
+        style="rounded,dotted"
+
+        { dmr; task_dmr2imgs; dmr_imgs; rank = same }
+
+
+
+        task_dmr2imgs [label = "Conversão em imagens,\nNormalização, \nExtração de fundo"]
+
+        dmr_imgs [
+            label = "Imagens\nRegião do Torax"
+            shape = folder, fillcolor = "#dddddd"
+        ]
+
+    }
+
+    subgraph cluster_l2 {
+        fontsize = 16
+        fontname = "Times"
+        label = "L2: cada lado do torax"
+        style="rounded,dotted"
+
+        l2_imgs [
+            label = "Imagens segmentadas\nde cada lado\n[Direto/Esquerdo]",
+            shape = folder, fillcolor = "#dddddd"
+        ]
+
+        l2_task_seg [label = "Análise de\nsimetria\ncontralateral"]
+
+        {l2_task_seg; l2_imgs; rank=same }
+
+        l2_task_seg -> l2_imgs
+        l2_imgs -> l2_task_extracao_features_a
+
+        l2_task_extracao_features_a [label = "Extração de features\nHaralick e LBP: H, B"]
+        l2_task_extracao_features_b [label = "Cálculo de\ndiferenças\nentre lados:\ndh, db"]
+        l2_task_extracao_features_a -> l2_data
+        l2_task_extracao_features_a -> l2_task_extracao_features_b
+        l2_task_extracao_features_b -> l2_data
+
+        {l2_task_extracao_features_b; l2_data; rank=same}
+
+        l2_data [
+            label = "\nDados L2\n[Paciente, Visita,\nDiagnostico,\nH, B,\ndh, db]",
+            shape = cylinder, fillcolor = "#dddddd"
+            margin = "0.1,0"
+        ]
+
+    }
+
+    subgraph cluster_l3 {
+        fontsize = 16
+        fontname = "Times"
+        label = "L3: cada mama"
+        style="rounded,dotted"
+
+        l3_task_aplicao_masks_mama_inteira [label = "Montagem e aplicação\nde máscaras de\nmama inteira"]
+        l3_imgs [
+            label = "Imagens segmentadas\nde cada mama: \n[Esquerda/Direita]",
+            shape = folder, fillcolor = "#dddddd"
+        ]
+
+        l3_task_aplicao_masks_mama_inteira -> l3_imgs
+        l3_task_extracao_features_a [label = "Extração de features\nHaralick e LBP: H, B"]
+        l3_task_extracao_features_b [label = "Cálculo de\ndiferenças\nentre lados:\ndh, db"]
+
+        l3_data [
+            label = "\nDados L3\n[Paciente, Visita,\nDiagnostico,\nH, B,\ndh, db]",
+            shape = cylinder, fillcolor = "#dddddd"
+            margin = "0.1,0"
+        ]
+        l3_imgs -> l3_task_extracao_features_a -> l3_task_extracao_features_b -> l3_data
+        l3_task_extracao_features_a -> l3_data
+        {l3_task_extracao_features_b; l3_data; rank=same}
+    }
+
+    subgraph cluster_l4 {
+        fontsize = 16
+        fontname = "Times"
+        label = "L4: cada quadrante\nde cada mama"
+        style="rounded,dotted"
+
+        l4_task_segmentacao [
+            label = "Segmentação\nde quadrantes\ndas mamas\n(processo manual)"
+            xlp="-20,-20"
+            pos="100,70"
+        ]
+
+        l4_imgs_masks [
+            label = "Máscaras para\ncada quadrante: \n[Esquerdo/Direito,\nInferior/Superior\nInterno/Externo]",
+            shape = folder, fillcolor = "#dddddd"
+        ]
+
+
+        l4_task_aplicao_masks_quads [label = "Aplicação de máscaras\nde cada quadrante\nde cada mama"]
+
+        l4_imgs [
+            label = "Imagens segmentadas\nde cada quadrante: \n[Esquerdo/Direito,\nInferior/Superior\nInterno/Externo]",
+         shape = folder, fillcolor = "#dddddd"
+        ]
+        l4_imgs_masks -> l4_task_aplicao_masks_quads -> l4_imgs
+        l4_task_segmentacao -> l4_imgs_masks
+
+        l4_task_extracao_features_a [label = "Extração de features\nHaralick e LBP: H, B"]
+        l4_task_extracao_features_b [label = "Cálculo de\ndiferenças\nentre lados:\ndh, db"]
+
+        l4_data [
+            label = "\nDados L4\n[Paciente, Visita,\nDiagnostico,\nH, B,\ndh, db]",
+            shape = cylinder, fillcolor = "#dddddd"
+            margin = "0.1,0"
+        ]
+
+        l4_imgs -> l4_task_extracao_features_a -> l4_data
+        l4_task_extracao_features_a -> l4_task_extracao_features_b -> l4_data
+        {l4_task_extracao_features_b; l4_data; rank=same}
+
+    }
+
+
+    final_results [
+        label = "\nDados para Classificação\n[Paciente, Visita, Diagnostico,\nNível, H, B, dh, db]",
+        shape = cylinder, fillcolor = "#dddddd"
+        margin = "0.1,0"
+    ]
+
+    dmr -> task_dmr2imgs -> dmr_imgs
+    dmr_imgs -> l2_task_seg [constraint=false]
+    l2_data -> final_results  [constraint=true]
+    l3_data -> final_results  [constraint=false]
+    l4_data -> final_results  [constraint=true]
+    l4_imgs_masks -> l3_task_aplicao_masks_mama_inteira [constraint=false]
+    l2_imgs -> l3_task_aplicao_masks_mama_inteira [constraint=false]
+    l2_imgs -> l4_task_segmentacao [constraint=false]
+
+
+    // { l2_imgs, l4_task_segmentacao, l4_imgs_masks; rank=same}
+
+    // { l3_imgs, l4_imgs; rank=same}
+
+
+
+    l2_imgs -> l4_task_aplicao_masks_quads
+
+}

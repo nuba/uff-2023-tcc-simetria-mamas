@@ -1,0 +1,88 @@
+digraph {
+    ranksep = "0.05"
+    nodesep = "0.7"
+    ratio=0.8
+    // dpi=400
+    node [
+        fontname = "Times"
+        shape = rectangle
+        fontsize = 16
+        style = "filled,bold"
+        fillcolor = "#ffffff",
+        margin = "0.1,0.1"
+    ]
+    edge [
+        fontname = "Times"
+        fontsize = 14
+    ]
+
+        l2_imgs [
+            label = "Imagens segmentadas\nde cada lado\n[Direto/Esquerdo]",
+            shape = folder, fillcolor = "#dddddd"
+        ]
+
+
+    subgraph cluster_l4 {
+        fontsize = 16
+        fontname = "Times"
+        label = "L4: cada quadrante\nde cada mama"
+        style="rounded,dotted"
+
+        l4_task_segmentacao [
+            label = "Segmentação\nde quadrantes\ndas mamas\n(processo manual)"
+            xlp="-20,-20"
+            pos="100,70"
+        ]
+
+        l4_imgs_masks [
+            label = "Máscaras para\ncada quadrante: \n[Esquerdo/Direito,\nInferior/Superior\nInterno/Externo]",
+            shape = folder, fillcolor = "#dddddd"
+        ]
+
+
+        l4_task_aplicao_masks_quads [label = "Aplicação de máscaras\nde cada quadrante\nde cada mama"]
+
+        l4_imgs [
+            label = "Imagens segmentadas\nde cada quadrante: \n[Esquerdo/Direito,\nInferior/Superior\nInterno/Externo]",
+         shape = folder, fillcolor = "#dddddd"
+        ]
+        l4_imgs_masks -> l4_task_aplicao_masks_quads -> l4_imgs
+        l4_task_segmentacao -> l4_imgs_masks
+
+        l4_task_extracao_features_a [label = "Extração de features\nHaralick e LBP: H, B"]
+        l4_task_extracao_features_b [label = "Cálculo de\ndiferenças\nentre lados:\ndh, db"]
+
+        l4_data [
+            label = "\nDados L4\n[Paciente, Visita,\nDiagnostico,\nH, B,\ndh, db]",
+            shape = cylinder, fillcolor = "#dddddd"
+            margin = "0.1,0"
+        ]
+
+        l4_imgs -> l4_task_extracao_features_a -> l4_data
+        l4_task_extracao_features_a -> l4_task_extracao_features_b -> l4_data
+        {l4_task_extracao_features_b; l4_data; rank=same}
+        {l4_imgs; l4_task_extracao_features_a; l4_task_aplicao_masks_quads;  rank=same}
+	{l4_task_segmentacao; l4_imgs_masks; rank=same}
+
+    }
+
+    final_results [
+        label = "\nDados para Classificação\n[Paciente, Visita, Diagnostico,\nNível, H, B, dh, db]",
+        shape = cylinder, fillcolor = "#dddddd"
+        margin = "0.1,0"
+    ]
+
+    l4_imgs_masks -> l3_task_aplicao_masks_mama_inteira [constraint=true]
+    l2_imgs -> l4_task_segmentacao [constraint=false]
+
+    l3_task_aplicao_masks_mama_inteira[shape=none, label="L3\n..."]
+
+
+    l4_data -> final_results [constraint=false]
+    l2_imgs -> l3_task_aplicao_masks_mama_inteira [style=invis]
+    l3_task_aplicao_masks_mama_inteira -> final_results [style=invis]
+
+    l2_imgs -> l4_task_aplicao_masks_quads
+
+
+}

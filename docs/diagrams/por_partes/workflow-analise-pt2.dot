@@ -1,0 +1,78 @@
+digraph {
+    ranksep = "0.05"
+    nodesep = "0.7"
+    ratio=0.8
+    // dpi=400
+    node [
+        fontname = "Times"
+        shape = rectangle
+        fontsize = 16
+        style = "filled,bold"
+        fillcolor = "#ffffff",
+        margin = "0.1,0.1"
+    ]
+    edge [
+        fontname = "Times"
+        fontsize = 14
+    ]
+
+        dmr_imgs [
+            label = "Imagens\nRegião do Torax"
+            shape = folder, fillcolor = "#dddddd"
+        ]
+
+    subgraph cluster_l2 {
+        fontsize = 16
+        fontname = "Times"
+        label = "L2: cada lado do torax"
+        style="rounded,dotted"
+
+        l2_imgs [
+            label = "Imagens segmentadas\nde cada lado\n[Direto/Esquerdo]",
+            shape = folder, fillcolor = "#dddddd"
+        ]
+
+        l2_task_seg [label = "Análise de\nsimetria\ncontralateral"]
+
+        {l2_task_seg; l2_imgs; rank=same }
+
+        l2_task_seg -> l2_imgs
+        l2_imgs -> l2_task_extracao_features_a
+
+        l2_task_extracao_features_a [label = "Extração de features\nHaralick e LBP: H, B"]
+        l2_task_extracao_features_b [label = "Cálculo de\ndiferenças\nentre lados:\ndh, db"]
+        l2_task_extracao_features_a -> l2_data
+        l2_task_extracao_features_a -> l2_task_extracao_features_b
+        l2_task_extracao_features_b -> l2_data
+
+        {l2_task_extracao_features_b; l2_data; rank=same}
+
+        l2_data [
+            label = "\nDados L2\n[Paciente, Visita,\nDiagnostico,\nH, B,\ndh, db]",
+            shape = cylinder, fillcolor = "#dddddd"
+            margin = "0.1,0"
+        ]
+
+    }
+
+
+
+    final_results [
+        label = "\nDados para Classificação\n[Paciente, Visita, Diagnostico,\nNível, H, B, dh, db]",
+        shape = cylinder, fillcolor = "#dddddd"
+        margin = "0.1,0"
+    ]
+
+    dmr_imgs -> l2_task_seg [constraint=false]
+    l2_data -> final_results  [constraint=false]
+    l2_imgs -> l3_task_aplicao_masks_mama_inteira [constraint=false]
+    l2_imgs -> l4_task [constraint=false]
+
+    l3_task_aplicao_masks_mama_inteira [shape=none, label="L3\n..."]
+    l4_task[shape=none, label="L4\n..."]
+
+
+    l3_task_aplicao_masks_mama_inteira -> l4_task [style=invis]
+    l4_task -> final_results [style=invis]
+
+}

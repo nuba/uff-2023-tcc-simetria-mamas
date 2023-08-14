@@ -1,0 +1,109 @@
+digraph {
+    ranksep = "0.05"
+    nodesep = "0.7"
+    ratio=0.8
+    // dpi=400
+    node [
+        fontname = "Times"
+        shape = rectangle
+        fontsize = 16
+        style = "filled,bold"
+        fillcolor = "#ffffff",
+        margin = "0.1,0.1"
+    ]
+    edge [
+        fontname = "Times"
+        fontsize = 14
+    ]
+
+    initial_data [
+        label = "\nDados para Classificação\n[Paciente, Visita, Diagnostico,\nNível, H, B, dh, db]",
+        shape = cylinder, fillcolor = "#dddddd"
+        margin = "0.1,0"
+    ]
+
+    results [
+        label="\nResultados da Classificação\nMétricas de performance\n(médias e desvio padrão)",
+        shape=cylinder, fillcolor="#dddddd"
+        margin = "0.1,0"
+    ]
+
+    subgraph cluster_clfs_seed {
+        fontname = "Times"
+        label = "(Multiplas iterações)"
+        fontsize = "12"
+        style = "dotted"
+
+        pre_classificador [label = "Particionamento", shape = rectangle]
+
+        subgraph cluster_clfs_seed_tto {
+            fontname = "Times"
+            label = "Para cada nível [L2, L3, L4]\n e cada base [H, B, H+B]"
+            fontsize = "12"
+            style = "dotted"
+
+            pre_classificador_2 [label = "Tratamentos\n[base, base+dh,\nbase+db,\nbase+dh+db]", shape = rectangle]
+
+            subgraph cluster_clfs_seed_class {
+                fontname = "Times"
+                label = "Para cada classificador"
+                fontsize = "12"
+                style = "dotted"
+
+                classificador [label = "Treinamento\nClassificação", shape = rectangle]
+
+            }
+
+        }
+
+        seed_results [
+            label = "\nMétricas da Classificação\n(por Iteração)",
+            shape = cylinder, fillcolor = "#dddddd"
+            margin = "0.1,0"
+        ]
+
+    }
+    pre_classificador -> pre_classificador_2 -> classificador -> seed_results
+
+    initial_data -> pre_classificador [constraint=false]
+
+
+    seed_results -> results [constraint=false]
+
+    initial_data -> final_friedman [color=red, style=invis]
+    initial_data -> results [color=red, style=invis]
+    pre_classificador_2 -> results [color=red, style=invis]
+
+
+
+
+
+    subgraph cluster_posthoc {
+        fontname = "Times"
+        label = "Testes Post-Hoc\npara cada [Nível, Base])"
+        fontsize = "16"
+        style = "dotted"
+
+        { final_friedman; final_nemenyi; rank = same}
+
+
+        final_friedman -> final_nemenyi [label = "sim\lp < 0.05\l"]
+
+        final_friedman [label = "Friedman Chi^2\nPosso rejeitar\nHipótese nula?"]
+        final_nemenyi [label = "Friedman-Nemenyi\n(pares com diferenças\nsignificativas)"]
+
+        final_results [
+            label = "\nResultados\nAnálise Post-Hoc",
+            shape = cylinder, fillcolor = "#dddddd"
+            margin = "0.1,0"
+        ]
+
+        final_friedman -> final_results [label = "não,\lp > 0.05\l"]
+        final_nemenyi -> final_results
+    }
+
+    results -> final_friedman [constraint=false]
+
+
+
+}
